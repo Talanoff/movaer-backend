@@ -48,12 +48,4 @@
         </div>
     </section>
 
-    <section class="py-10 xl:py-20 bg-slate-50">
-        <div class="container max-w-4xl">
-            <h2 class="text-center text-5xl font-bold">
-                {{ __('Something') }}
-            </h2>
-        </div>
-    </section>
-
 </x-app-layout>
