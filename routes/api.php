@@ -1,5 +1,11 @@
 <?php
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+use App\Http\Controllers\Api\ConfigController;
+
+Route::get('config', ConfigController::class);
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+], static function () {
+    //
 });
