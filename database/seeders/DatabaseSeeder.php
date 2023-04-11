@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
+use Laravel\Telescope\Telescope;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,9 +19,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Telescope::startRecording();
+
         User::factory()->create([
-            'name' => 'Олег Таланов',
-            'email' => 'talanov.o@gmail.com',
+            'name' => 'Oleh Talanov',
+            'email' => 'oleh@webcap.com',
+            'role' => UserRoleEnum::Administrator,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Valentina Dmitrenko',
+            'email' => 'valentina@webcap.com',
             'role' => UserRoleEnum::Administrator,
         ]);
 
@@ -49,5 +58,7 @@ class DatabaseSeeder extends Seeder
                 'order_id' => $order->id,
             ]);
         });
+
+        Telescope::startRecording();
     }
 }
