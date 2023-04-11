@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * App\Models\Service
@@ -31,8 +32,14 @@ use Illuminate\Support\Carbon;
  */
 class Service extends Model
 {
+    use HasTranslations;
+
     protected $fillable = [
         'name',
+    ];
+
+    protected $translatable = [
+        'name'
     ];
 
     /* Relationships */

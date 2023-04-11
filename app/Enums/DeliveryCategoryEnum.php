@@ -2,12 +2,12 @@
 
 namespace App\Enums;
 
-enum DeliveryCategoryEnum
+enum DeliveryCategoryEnum: int
 {
-    case OnePackage;
-    case ManyPackages;
-    case Pallet;
-    case Various;
+    case OnePackage = 0;
+    case ManyPackages = 1;
+    case Pallet = 2;
+    case Various = 3;
 
     public function getIconName(): string
     {

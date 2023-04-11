@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\VendorScopeEnum;
 use Database\Factories\VendorFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,7 +23,6 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property string $name
  * @property string|null $about
  * @property string|null $address
- * @property VendorScopeEnum $scope
  * @property string $employees
  * @property float|null $rating
  * @property Carbon|null $created_at
@@ -67,13 +65,8 @@ class Vendor extends Model
         'name',
         'about',
         'address',
-        'scope',
         'employees',
         'rating',
-    ];
-
-    protected $casts = [
-        'scope' => VendorScopeEnum::class,
     ];
 
     public function getNanoIdOptions(): NanoIdOptions

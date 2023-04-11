@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum ChatMessageTypeEnum
+enum ChatMessageTypeEnum: int
 {
-    case Regular;
-    case Offer;
+    case Regular = 0;
+    case Offer = 1;
 }

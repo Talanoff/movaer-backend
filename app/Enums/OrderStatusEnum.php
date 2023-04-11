@@ -2,13 +2,13 @@
 
 namespace App\Enums;
 
-enum OrderStatusEnum
+enum OrderStatusEnum: int
 {
-    case Created;
-    case AwaitingForApprove;
-    case Approved;
-    case Processing;
-    case Processed;
-    case Fulfilled;
-    case Canceled;
+    case Created = 0;
+    case AwaitingForApprove = 1;
+    case Approved = 2;
+    case Processing = 3;
+    case Processed = 4;
+    case Fulfilled = 5;
+    case Canceled = 6;
 }

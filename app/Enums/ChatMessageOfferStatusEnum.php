@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum ChatMessageOfferStatusEnum
+enum ChatMessageOfferStatusEnum: int
 {
-    case Pending;
-    case Approved;
-    case Rejected;
+    case Pending = 0;
+    case Approved = 1;
+    case Rejected = 2;
 }

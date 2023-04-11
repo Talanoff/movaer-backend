@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\VendorScopeEnum;
 use App\Models\Vendor;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,7 +16,7 @@ class VendorFactory extends Factory
      *
      * @return array<string, mixed>
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function definition(): array
     {
@@ -24,7 +24,6 @@ class VendorFactory extends Factory
             'name' => $this->faker->company,
             'about' => $this->faker->sentence,
             'address' => $this->faker->address,
-            'scope' => VendorScopeEnum::cases()[random_int(0, 3)],
             'employees' => random_int(5, 100),
         ];
     }

@@ -7,7 +7,9 @@ use App\Enums\UserRoleEnum;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
+use Hash;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -136,5 +138,14 @@ class User extends Authenticatable implements HasMedia, FilamentUser
         $this->addMediaConversion('thumb')
             ->performOnCollections('avatar')
             ->fit(Manipulations::FIT_CROP, 120, 120);
+    }
+
+    /* Accessors & Mutators */
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: static fn($value) => Hash::make($value)
+        );
     }
 }

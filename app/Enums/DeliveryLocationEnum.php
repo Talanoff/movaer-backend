@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum DeliveryLocationEnum
+enum DeliveryLocationEnum: int
 {
-    case LivingPlace;
-    case OfficeBuilding;
-    case StorageShed;
+    case LivingPlace = 0;
+    case OfficeBuilding = 1;
+    case StorageShed = 2;
 }

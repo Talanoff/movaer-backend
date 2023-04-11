@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "378266216dcf62867bfc4b1840a2b722",
+    "content-hash": "a960477d993d3f97aedaf9b8df584894",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -929,6 +929,52 @@
                 "source": "https://github.com/filamentphp/filament"
             },
             "time": "2023-03-30T17:39:12+00:00"
+        },
+        {
+            "name": "filament/spatie-laravel-translatable-plugin",
+            "version": "v2.17.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filamentphp/spatie-laravel-translatable-plugin.git",
+                "reference": "e279f11eb26bd1386e7a3b77c42668d99628c6cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filamentphp/spatie-laravel-translatable-plugin/zipball/e279f11eb26bd1386e7a3b77c42668d99628c6cf",
+                "reference": "e279f11eb26bd1386e7a3b77c42668d99628c6cf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "filament/filament": "self.version",
+                "illuminate/support": "^8.6|^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-translatable": "^5.0|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Filament\\SpatieLaravelTranslatablePluginServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Filament\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Filament support for `spatie/laravel-translatable`.",
+            "homepage": "https://github.com/filamentphp/filament",
+            "support": {
+                "issues": "https://github.com/filamentphp/filament/issues",
+                "source": "https://github.com/filamentphp/filament"
+            },
+            "time": "2023-04-07T11:25:50+00:00"
         },
         {
             "name": "filament/support",
@@ -4419,6 +4465,87 @@
                 }
             ],
             "time": "2023-03-14T16:41:21+00:00"
+        },
+        {
+            "name": "spatie/laravel-translatable",
+            "version": "6.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-translatable.git",
+                "reference": "f472fbaec8a3d44096d3c6ed029484d0bf9116a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/f472fbaec8a3d44096d3c6ed029484d0bf9116a7",
+                "reference": "f472fbaec8a3d44096d3c6ed029484d0bf9116a7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Translatable\\TranslatableServiceProvider"
+                    ]
+                },
+                "aliases": {
+                    "Translatable": "Spatie\\Translatable\\Facades\\Translatable"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Translatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to make an Eloquent model hold translations",
+            "homepage": "https://github.com/spatie/laravel-translatable",
+            "keywords": [
+                "eloquent",
+                "i8n",
+                "laravel-translatable",
+                "model",
+                "multilingual",
+                "spatie",
+                "translate"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-translatable/tree/6.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-19T17:50:34+00:00"
         },
         {
             "name": "spatie/temporary-directory",

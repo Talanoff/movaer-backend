@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * App\Models\Vehicle
@@ -32,13 +34,23 @@ use Illuminate\Support\Carbon;
  */
 class Vehicle extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     protected $fillable = [
         'name',
+        'service_id'
+    ];
+
+    protected $translatable = [
+        'name'
     ];
 
     /* Relationships */
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
 
     public function vendors(): BelongsToMany
     {

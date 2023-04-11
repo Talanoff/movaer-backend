@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,17 +17,17 @@ return new class extends Migration
             $table->char('nano_id', 8)->unique();
             $table->foreignIdFor(Vendor::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
-            $table->string('status');
-            $table->string('category');
-            $table->unsignedInteger('goods_number')->nullable();
-            $table->unsignedInteger('goods_weight')->nullable();
+            $table->tinyInteger('status');
+            $table->tinyInteger('category');
+            $table->unsignedSmallInteger('goods_number')->nullable();
+            $table->unsignedSmallInteger('goods_weight')->nullable();
             $table->text('description')->nullable();
             $table->string('address_from');
             $table->string('address_to');
             $table->date('pickup_at');
             $table->date('delivery_at');
-            $table->string('pickup_location_type');
-            $table->string('delivery_location_type');
+            $table->tinyInteger('pickup_location_type');
+            $table->tinyInteger('delivery_location_type');
             $table->json('options');
             $table->timestamps();
             $table->softDeletes();

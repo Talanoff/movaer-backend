@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-enum UserVendorRoleEnum
+enum UserVendorRoleEnum: int
 {
-    case Owner;
-    case Manager;
-    case Employee;
+    case Owner = 0;
+    case Manager = 1;
+    case Employee = 2;
 }

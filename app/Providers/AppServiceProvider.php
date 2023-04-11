@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Vite;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,8 +30,20 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         JsonResource::withoutWrapping();
-        \Vite::useScriptTagAttributes([
+
+        Vite::useScriptTagAttributes([
             'defer' => true,
         ]);
+
+        Filament::serving(static function () {
+            Filament::registerViteTheme('resources/css/filament.css');
+
+            Filament::registerNavigationGroups([
+                NavigationGroup::make('settings')
+                    ->label('Settings')
+                    ->icon('heroicon-s-cog')
+                    ->collapsed(),
+            ]);
+        });
     }
 }
