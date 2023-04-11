@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\ChatRoomFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Talanov\Nanoid\HasNanoId;
 use Talanov\Nanoid\NanoIdOptions;
 
@@ -18,28 +23,28 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property int|null $order_id
  * @property int|null $vendor_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ChatMessage> $messages
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, ChatMessage> $messages
  * @property-read int|null $messages_count
- * @property-read \App\Models\Order|null $order
- * @property-read \App\Models\User $user
- * @property-read \App\Models\Vendor|null $vendor
+ * @property-read Order|null $order
+ * @property-read User $user
+ * @property-read Vendor|null $vendor
  *
- * @method static \Database\Factories\ChatRoomFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom query()
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereNanoId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereOrderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereVendorId($value)
+ * @method static ChatRoomFactory factory($count = null, $state = [])
+ * @method static Builder|ChatRoom newModelQuery()
+ * @method static Builder|ChatRoom newQuery()
+ * @method static Builder|ChatRoom query()
+ * @method static Builder|ChatRoom whereCreatedAt($value)
+ * @method static Builder|ChatRoom whereId($value)
+ * @method static Builder|ChatRoom whereNanoId($value)
+ * @method static Builder|ChatRoom whereOrderId($value)
+ * @method static Builder|ChatRoom whereTitle($value)
+ * @method static Builder|ChatRoom whereUpdatedAt($value)
+ * @method static Builder|ChatRoom whereUserId($value)
+ * @method static Builder|ChatRoom whereVendorId($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class ChatRoom extends Model
 {

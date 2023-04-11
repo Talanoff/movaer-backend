@@ -2,28 +2,32 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Service
  *
  * @property int $id
  * @property string $name
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Vendor> $vendors
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Vendor> $vendors
  * @property-read int|null $vendors_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Service newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Service newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Service query()
- * @method static \Illuminate\Database\Eloquent\Builder|Service whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Service whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Service whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Service whereUpdatedAt($value)
+ * @method static Builder|Service newModelQuery()
+ * @method static Builder|Service newQuery()
+ * @method static Builder|Service query()
+ * @method static Builder|Service whereCreatedAt($value)
+ * @method static Builder|Service whereId($value)
+ * @method static Builder|Service whereName($value)
+ * @method static Builder|Service whereUpdatedAt($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Service extends Model
 {

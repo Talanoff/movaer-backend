@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\FeedbackFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\Feedback
@@ -15,24 +19,24 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property int $service_rating
  * @property int $delivery_rating
  * @property string|null $message
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Order $order
- * @property-read \App\Models\Vendor|null $vendor
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Order $order
+ * @property-read Vendor|null $vendor
  *
- * @method static \Database\Factories\FeedbackFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback query()
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereDeliveryRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereOrderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereServiceRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereUpdatedAt($value)
+ * @method static FeedbackFactory factory($count = null, $state = [])
+ * @method static Builder|Feedback newModelQuery()
+ * @method static Builder|Feedback newQuery()
+ * @method static Builder|Feedback query()
+ * @method static Builder|Feedback whereCreatedAt($value)
+ * @method static Builder|Feedback whereDeliveryRating($value)
+ * @method static Builder|Feedback whereId($value)
+ * @method static Builder|Feedback whereMessage($value)
+ * @method static Builder|Feedback whereOrderId($value)
+ * @method static Builder|Feedback whereServiceRating($value)
+ * @method static Builder|Feedback whereUpdatedAt($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Feedback extends Model
 {

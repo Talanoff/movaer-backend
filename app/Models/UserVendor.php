@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Enums\UserVendorRoleEnum;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\UserVendor
@@ -12,19 +15,19 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * @property int $vendor_id
  * @property int $user_id
  * @property UserVendorRoleEnum $role
- * @property \Illuminate\Support\Carbon $joined_at
- * @property-read \App\Models\User $user
- * @property-read \App\Models\Vendor $vendor
+ * @property Carbon $joined_at
+ * @property-read User $user
+ * @property-read Vendor $vendor
  *
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor whereJoinedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserVendor whereVendorId($value)
+ * @method static Builder|UserVendor newModelQuery()
+ * @method static Builder|UserVendor newQuery()
+ * @method static Builder|UserVendor query()
+ * @method static Builder|UserVendor whereJoinedAt($value)
+ * @method static Builder|UserVendor whereRole($value)
+ * @method static Builder|UserVendor whereUserId($value)
+ * @method static Builder|UserVendor whereVendorId($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class UserVendor extends Pivot
 {

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\VendorScopeEnum;
+use Database\Factories\VendorFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Carbon;
 use Talanov\Nanoid\HasNanoId;
 use Talanov\Nanoid\NanoIdOptions;
 
@@ -25,22 +27,22 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property VendorScopeEnum $scope
  * @property string $employees
  * @property float|null $rating
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
- * @property-read Collection<int, \App\Models\Feedback> $feedback
+ * @property-read Collection<int, Feedback> $feedback
  * @property-read int|null $feedback_count
- * @property-read Collection<int, \App\Models\Order> $orders
+ * @property-read Collection<int, Order> $orders
  * @property-read int|null $orders_count
- * @property-read Collection<int, \App\Models\Service> $services
+ * @property-read Collection<int, Service> $services
  * @property-read int|null $services_count
- * @property-read Collection<int, \App\Models\User> $users
+ * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
- * @property-read Collection<int, \App\Models\Vehicle> $vehicles
+ * @property-read Collection<int, Vehicle> $vehicles
  * @property-read int|null $vehicles_count
  *
- * @method static \Database\Factories\VendorFactory factory($count = null, $state = [])
+ * @method static VendorFactory factory($count = null, $state = [])
  * @method static Builder|Vendor newModelQuery()
  * @method static Builder|Vendor newQuery()
  * @method static Builder|Vendor query()
