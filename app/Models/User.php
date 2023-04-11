@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRoleEnum;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -62,7 +63,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  *
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia, FilamentUser
 {
     use HasFactory, HasUniqId, Notifiable, InteractsWithMedia;
 
@@ -108,6 +109,13 @@ class User extends Authenticatable implements HasMedia
     public function chatRooms(): HasMany
     {
         return $this->hasMany(ChatRoom::class);
+    }
+
+    /* Admin access */
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@webcap.com');
     }
 
     /* Media */
