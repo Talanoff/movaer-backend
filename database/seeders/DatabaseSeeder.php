@@ -19,8 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Telescope::startRecording();
-
         User::factory()->create([
             'name' => 'Oleh Talanov',
             'email' => 'oleh@webcap.com',
@@ -58,7 +56,5 @@ class DatabaseSeeder extends Seeder
                 'order_id' => $order->id,
             ]);
         });
-
-        Telescope::startRecording();
     }
 }
