@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', static function (Blueprint $table) {
             $table->id();
-            $table->string('uid')->unique();
+            $table->char('nano_id', 8)->unique();
             $table->foreignIdFor(Vendor::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->string('status');

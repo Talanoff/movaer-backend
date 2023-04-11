@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "900844b47a916e160fb655a64733d970",
+    "content-hash": "378266216dcf62867bfc4b1840a2b722",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -6675,6 +6675,53 @@
                 }
             ],
             "time": "2023-03-29T21:42:15+00:00"
+        },
+        {
+            "name": "talanov/nanoid",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Talanoff/nanoid.git",
+                "reference": "3a3d96f6f41f390b7a1841c3eba4534d3cb180c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Talanoff/nanoid/zipball/3a3d96f6f41f390b7a1841c3eba4534d3cb180c8",
+                "reference": "3a3d96f6f41f390b7a1841c3eba4534d3cb180c8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Talanov\\Nanoid\\NanoIdServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Talanov\\Nanoid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oleh",
+                    "email": "talanov.o@gmail.com"
+                }
+            ],
+            "description": "Add Nano ID for Laravel models",
+            "support": {
+                "issues": "https://github.com/Talanoff/nanoid/issues",
+                "source": "https://github.com/Talanoff/nanoid/tree/1.0.1"
+            },
+            "time": "2023-04-11T10:08:32+00:00"
         },
         {
             "name": "tgalopin/html-sanitizer",

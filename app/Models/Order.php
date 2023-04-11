@@ -22,6 +22,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Talanov\Nanoid\HasNanoId;
+use Talanov\Nanoid\NanoIdOptions;
 
 /**
  * App\Models\Order
@@ -84,7 +86,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Order extends Model implements HasMedia
 {
-    use HasFactory, HasUniqId, SoftDeletes, InteractsWithMedia;
+    use HasFactory, HasNanoId, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'status',
@@ -113,9 +115,9 @@ class Order extends Model implements HasMedia
         'options' => 'object',
     ];
 
-    public function getUniqIdOptions(): UniqIdOptions
+    public function getNanoIdOptions(): NanoIdOptions
     {
-        return UniqIdOptions::make();
+        return NanoIdOptions::make();
     }
 
     /* Relationships */

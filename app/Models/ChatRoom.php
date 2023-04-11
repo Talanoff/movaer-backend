@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Packages\UniqId\HasUniqId;
 use Packages\UniqId\UniqIdOptions;
+use Talanov\Nanoid\HasNanoId;
+use Talanov\Nanoid\NanoIdOptions;
 
 /**
  * App\Models\ChatRoom
@@ -43,7 +45,7 @@ use Packages\UniqId\UniqIdOptions;
  */
 class ChatRoom extends Model
 {
-    use HasFactory, HasUniqId;
+    use HasFactory, HasNanoId;
 
     protected $fillable = [
         'uid',
@@ -53,9 +55,9 @@ class ChatRoom extends Model
         'order_id',
     ];
 
-    public function getUniqIdOptions(): UniqIdOptions
+    public function getNanoIdOptions(): NanoIdOptions
     {
-        return UniqIdOptions::make();
+        return NanoIdOptions::make()->length(12);
     }
 
     /* Relationships */

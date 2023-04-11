@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Packages\UniqId\HasUniqId;
 use Packages\UniqId\UniqIdOptions;
+use Talanov\Nanoid\HasNanoId;
+use Talanov\Nanoid\NanoIdOptions;
 
 /**
  * App\Models\Vendor
@@ -59,7 +61,7 @@ use Packages\UniqId\UniqIdOptions;
  */
 class Vendor extends Model
 {
-    use HasFactory, HasUniqId;
+    use HasFactory, HasNanoId;
 
     protected $fillable = [
         'name',
@@ -74,9 +76,9 @@ class Vendor extends Model
         'scope' => VendorScopeEnum::class,
     ];
 
-    public function getUniqIdOptions(): UniqIdOptions
+    public function getNanoIdOptions(): NanoIdOptions
     {
-        return UniqIdOptions::make();
+        return NanoIdOptions::make();
     }
 
     /* Relationships */

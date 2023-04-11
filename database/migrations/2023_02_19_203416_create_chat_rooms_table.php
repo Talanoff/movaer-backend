@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('chat_rooms', static function (Blueprint $table) {
             $table->id();
-            $table->string('uid')->unique();
+            $table->char('nano_id', 12)->unique();
             $table->string('title');
             $table->foreignIdFor(Order::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Vendor::class)->nullable()->constrained()->nullOnDelete();

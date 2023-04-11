@@ -17,6 +17,8 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Talanov\Nanoid\HasNanoId;
+use Talanov\Nanoid\NanoIdOptions;
 
 /**
  * App\Models\User
@@ -65,7 +67,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class User extends Authenticatable implements HasMedia, FilamentUser
 {
-    use HasFactory, HasUniqId, Notifiable, InteractsWithMedia;
+    use HasFactory, HasNanoId, Notifiable, InteractsWithMedia;
 
     protected $fillable = [
         'uid',
@@ -87,9 +89,9 @@ class User extends Authenticatable implements HasMedia, FilamentUser
         'role' => UserRoleEnum::class,
     ];
 
-    public function getUniqIdOptions(): UniqIdOptions
+    public function getNanoIdOptions(): NanoIdOptions
     {
-        return UniqIdOptions::make();
+        return NanoIdOptions::make();
     }
 
     /* Relationships */

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendors', static function (Blueprint $table) {
             $table->id();
-            $table->string('uid')->unique();
+            $table->char('nano_id', 8)->unique();
             $table->string('name');
             $table->text('about')->nullable();
             $table->text('address')->nullable();
