@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Packages\UniqId\HasUniqId;
-use Packages\UniqId\UniqIdOptions;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -29,7 +27,7 @@ use Talanov\Nanoid\NanoIdOptions;
  * App\Models\Order
  *
  * @property int $id
- * @property string $uid
+ * @property string $nano_id
  * @property int|null $vendor_id
  * @property int|null $user_id
  * @property OrderStatusEnum $status
@@ -71,11 +69,11 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static Builder|Order whereGoodsNumber($value)
  * @method static Builder|Order whereGoodsWeight($value)
  * @method static Builder|Order whereId($value)
+ * @method static Builder|Order whereNanoId($value)
  * @method static Builder|Order whereOptions($value)
  * @method static Builder|Order wherePickupAt($value)
  * @method static Builder|Order wherePickupLocationType($value)
  * @method static Builder|Order whereStatus($value)
- * @method static Builder|Order whereUid($value)
  * @method static Builder|Order whereUpdatedAt($value)
  * @method static Builder|Order whereUserId($value)
  * @method static Builder|Order whereVendorId($value)

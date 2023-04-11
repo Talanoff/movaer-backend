@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Packages\UniqId\HasUniqId;
-use Packages\UniqId\UniqIdOptions;
 use Talanov\Nanoid\HasNanoId;
 use Talanov\Nanoid\NanoIdOptions;
 
@@ -20,7 +18,7 @@ use Talanov\Nanoid\NanoIdOptions;
  * App\Models\Vendor
  *
  * @property int $id
- * @property string $uid
+ * @property string $nano_id
  * @property string $name
  * @property string|null $about
  * @property string|null $address
@@ -33,10 +31,10 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property-read int|null $chat_rooms_count
  * @property-read Collection<int, \App\Models\Feedback> $feedback
  * @property-read int|null $feedback_count
- * @property-read Collection<int, \App\Models\Service> $options
- * @property-read int|null $options_count
  * @property-read Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
+ * @property-read Collection<int, \App\Models\Service> $services
+ * @property-read int|null $services_count
  * @property-read Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
  * @property-read Collection<int, \App\Models\Vehicle> $vehicles
@@ -52,9 +50,9 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static Builder|Vendor whereEmployees($value)
  * @method static Builder|Vendor whereId($value)
  * @method static Builder|Vendor whereName($value)
+ * @method static Builder|Vendor whereNanoId($value)
  * @method static Builder|Vendor whereRating($value)
  * @method static Builder|Vendor whereScope($value)
- * @method static Builder|Vendor whereUid($value)
  * @method static Builder|Vendor whereUpdatedAt($value)
  *
  * @mixin Eloquent

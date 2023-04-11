@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Packages\UniqId\HasUniqId;
-use Packages\UniqId\UniqIdOptions;
 use Talanov\Nanoid\HasNanoId;
 use Talanov\Nanoid\NanoIdOptions;
 
@@ -15,7 +13,7 @@ use Talanov\Nanoid\NanoIdOptions;
  * App\Models\ChatRoom
  *
  * @property int $id
- * @property string $uid
+ * @property string $nano_id
  * @property string $title
  * @property int|null $order_id
  * @property int|null $vendor_id
@@ -34,9 +32,9 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom query()
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereNanoId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereOrderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereUid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ChatRoom whereVendorId($value)

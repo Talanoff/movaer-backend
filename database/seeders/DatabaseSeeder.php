@@ -10,7 +10,6 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
-use Laravel\Telescope\Telescope;
 
 class DatabaseSeeder extends Seeder
 {

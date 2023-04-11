@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * App\Models\TransportationOptions
+ * App\Models\Service
  *
  * @property int $id
  * @property string $name
