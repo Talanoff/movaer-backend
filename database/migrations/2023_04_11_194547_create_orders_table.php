@@ -1,13 +1,13 @@
 <?php
 
+use App\Models\Country;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,13 +23,15 @@ return new class extends Migration
             $table->unsignedSmallInteger('goods_number')->nullable();
             $table->unsignedSmallInteger('goods_weight')->nullable();
             $table->text('description')->nullable();
+            $table->foreignIdFor(Country::class, 'country_from_id')->nullable()->constrained('countries')->nullOnDelete();
+            $table->foreignIdFor(Country::class, 'country_to_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->string('address_from');
             $table->string('address_to');
             $table->date('pickup_at');
             $table->date('delivery_at');
             $table->tinyInteger('pickup_location_type');
             $table->tinyInteger('delivery_location_type');
-            $table->json('options');
+            $table->json('details');
             $table->timestamps();
             $table->softDeletes();
         });

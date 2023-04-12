@@ -99,7 +99,7 @@ class Order extends Model implements HasMedia
         'delivery_at',
         'pickup_location_type',
         'delivery_location_type',
-        'options',
+        'details',
         'user_id',
         'vendor_id',
     ];
@@ -111,7 +111,7 @@ class Order extends Model implements HasMedia
         'delivery_location_type' => DeliveryLocationEnum::class,
         'pickup_at' => 'date',
         'delivery_at' => 'date',
-        'options' => 'object',
+        'details' => 'object',
     ];
 
     public function getNanoIdOptions(): NanoIdOptions
