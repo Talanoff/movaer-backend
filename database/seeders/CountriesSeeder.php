@@ -22,7 +22,7 @@ class CountriesSeeder extends Seeder
             ], [
                 'name' => [
                     'en' => $country->name,
-                    'nl' => $nl[$country->alpha3]->name
+                    'nl' => $nl[$country->alpha3]->name,
                 ],
                 'alpha2' => $country->alpha2,
             ]);

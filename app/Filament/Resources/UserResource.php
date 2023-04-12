@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\UserRoleEnum;
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -12,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -37,15 +35,9 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->hiddenOn('edit'),
-                Forms\Components\TextInput::make('role')
+                Forms\Components\Select::make('role')
                     ->required()
-                    ->maxLength(20),
-                Forms\Components\TextInput::make('timezone')
-                    ->required()
-                    ->maxLength(50),
-                Forms\Components\TextInput::make('locale')
-                    ->required()
-                    ->maxLength(8),
+                    ->options(UserRoleEnum::getNames()),
             ]);
     }
 
@@ -68,7 +60,7 @@ class UserResource extends Resource
             ])
             ->filters([
                 Tables\Filters\Filter::make('verified')
-                    ->query(fn(Builder $query): Builder => $query->whereNotNull('email_verified_at')),
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

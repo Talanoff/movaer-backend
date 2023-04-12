@@ -39,7 +39,7 @@ class Service extends Model
     ];
 
     protected $translatable = [
-        'name'
+        'name',
     ];
 
     /* Relationships */

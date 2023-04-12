@@ -3,16 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
-use App\Filament\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
 use Filament\Forms;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ServiceResource extends Resource
 {
@@ -27,10 +23,10 @@ class ServiceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name.en')
-                    ->label('Name (EN)')
+                    ->label(__('forms.fields.name', ['locale' => 'en']))
                     ->required(),
                 Forms\Components\TextInput::make('name.nl')
-                    ->label('Name (NL)')
+                    ->label(__('forms.fields.name', ['locale' => 'nl']))
                     ->required(),
             ]);
     }

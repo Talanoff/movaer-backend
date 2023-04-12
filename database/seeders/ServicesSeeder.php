@@ -32,7 +32,7 @@ class ServicesSeeder extends Seeder
 
         foreach ($services as $service) {
             Service::create([
-                'name' => $service
+                'name' => $service,
             ]);
         }
     }

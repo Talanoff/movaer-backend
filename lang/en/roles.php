@@ -5,5 +5,5 @@ return [
     'vendor' => 'Vendor',
     'manager' => 'Manager',
     'employee' => 'Employee',
-    'customer' => 'Customer'
+    'customer' => 'Customer',
 ];

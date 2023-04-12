@@ -2,19 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\VehicleResource\Pages;
-use App\Models\Vehicle;
+use App\Filament\Resources\CountryResource\Pages;
+use App\Models\Country;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
-class VehicleResource extends Resource
+class CountryResource extends Resource
 {
-    protected static ?string $model = Vehicle::class;
+    protected static ?string $model = Country::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-truck';
+    protected static ?string $navigationIcon = 'heroicon-o-globe';
 
     protected static ?string $navigationGroup = 'settings';
 
@@ -28,8 +29,8 @@ class VehicleResource extends Resource
                 Forms\Components\TextInput::make('name.nl')
                     ->label(__('forms.fields.name', ['locale' => 'nl']))
                     ->required(),
-                Forms\Components\Select::make('service_id')
-                    ->relationship('service', 'name')
+                Forms\Components\Toggle::make('is_visible')
+                    ->label(__('forms.fields.visible'))
                     ->required(),
             ]);
     }
@@ -39,10 +40,14 @@ class VehicleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('service.name'),
+                Tables\Columns\TextColumn::make('alpha2'),
+                Tables\Columns\IconColumn::make('is_visible')
+                    ->label(__('forms.fields.visible'))
+                    ->boolean(),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make(__('forms.fields.visible'))
+                    ->query(fn (Builder $query): Builder => $query->where('is_visible', 1)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -62,9 +67,9 @@ class VehicleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVehicles::route('/'),
-            'create' => Pages\CreateVehicle::route('/create'),
-            'edit' => Pages\EditVehicle::route('/{record}/edit'),
+            'index' => Pages\ListCountries::route('/'),
+            'create' => Pages\CreateCountry::route('/create'),
+            'edit' => Pages\EditCountry::route('/{record}/edit'),
         ];
     }
 }

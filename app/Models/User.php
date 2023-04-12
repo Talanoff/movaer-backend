@@ -145,7 +145,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: static fn($value) => Hash::make($value)
+            set: static fn ($value) => Hash::make($value)
         );
     }
 }

@@ -38,11 +38,11 @@ class Vehicle extends Model
 
     protected $fillable = [
         'name',
-        'service_id'
+        'service_id',
     ];
 
     protected $translatable = [
-        'name'
+        'name',
     ];
 
     /* Relationships */
