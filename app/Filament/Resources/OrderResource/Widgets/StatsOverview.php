@@ -17,14 +17,16 @@ class StatsOverview extends BaseWidget
         [$thisWeekOrders, $totalOrders] = $this->weeklyOrders();
 
         return [
-            Card::make('Registrations', $thisWeekRegistrations->sum->aggregate)
-                ->description(abs($totalRegistrations).($totalRegistrations >= 0 ? ' increase' : ' decrease'))
+            Card::make('Weekly registrations', $thisWeekRegistrations->sum->aggregate)
+                ->description(abs($totalRegistrations) . ($totalRegistrations >= 0 ? ' increase' : ' decrease'))
                 ->descriptionIcon($totalRegistrations >= 0 ? 'heroicon-s-trending-up' : 'heroicon-s-trending-down')
-                ->chart($thisWeekRegistrations->map->aggregate->all()),
-            Card::make('Orders', $thisWeekOrders->sum->aggregate)
-                ->description(abs($totalOrders).($totalOrders >= 0 ? ' increase' : ' decrease'))
+                ->chart($thisWeekRegistrations->map->aggregate->all())
+                ->color($totalRegistrations > 0 ? 'success' : 'warning'),
+            Card::make('Weekly orders', $thisWeekOrders->sum->aggregate)
+                ->description(abs($totalOrders) . ($totalOrders >= 0 ? ' increase' : ' decrease'))
                 ->descriptionIcon($totalOrders >= 0 ? 'heroicon-s-trending-up' : 'heroicon-s-trending-down')
-                ->chart($thisWeekOrders->map->aggregate->all()),
+                ->chart($thisWeekOrders->map->aggregate->all())
+                ->color($totalRegistrations > 0 ? 'success' : 'warning'),
         ];
     }
 
