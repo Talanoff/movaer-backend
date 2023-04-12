@@ -3,15 +3,39 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ConfigRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Response;
 
 class ConfigController extends Controller
 {
-    public function __invoke(Request $request): JsonResponse
+    public function __construct(
+        protected readonly ConfigRepository $configRepository
+    ) {
+        //
+    }
+
+    public function services(): JsonResponse
     {
-        return \Response::json([
-            'contacts' => [],
-        ]);
+        return Response::json(
+            $this->configRepository->services()
+        );
+    }
+
+    public function vehicles(Request $request): JsonResponse
+    {
+        return Response::json(
+            $this->configRepository->vehicles(
+                array_filter(explode(',', $request->input('services')))
+            )
+        );
+    }
+
+    public function countries(): JsonResponse
+    {
+        return Response::json(
+            $this->configRepository->countries()
+        );
     }
 }

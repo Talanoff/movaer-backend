@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
@@ -14,9 +15,11 @@ use Spatie\Translatable\HasTranslations;
  * App\Models\Service
  *
  * @property int $id
- * @property string $name
+ * @property array $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read Collection<int, Vehicle> $vehicles
+ * @property-read int|null $vehicles_count
  * @property-read Collection<int, Vendor> $vendors
  * @property-read int|null $vendors_count
  *
@@ -43,6 +46,11 @@ class Service extends Model
     ];
 
     /* Relationships */
+
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 
     public function vendors(): BelongsToMany
     {

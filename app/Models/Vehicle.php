@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\VehicleFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,18 +17,22 @@ use Spatie\Translatable\HasTranslations;
  * App\Models\Vehicle
  *
  * @property int $id
- * @property string $name
+ * @property int $service_id
+ * @property array $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read Service $service
  * @property-read Collection<int, Vendor> $vendors
  * @property-read int|null $vendors_count
  *
+ * @method static VehicleFactory factory($count = null, $state = [])
  * @method static Builder|Vehicle newModelQuery()
  * @method static Builder|Vehicle newQuery()
  * @method static Builder|Vehicle query()
  * @method static Builder|Vehicle whereCreatedAt($value)
  * @method static Builder|Vehicle whereId($value)
  * @method static Builder|Vehicle whereName($value)
+ * @method static Builder|Vehicle whereServiceId($value)
  * @method static Builder|Vehicle whereUpdatedAt($value)
  *
  * @mixin Eloquent

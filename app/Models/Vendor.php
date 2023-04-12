@@ -52,7 +52,6 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static Builder|Vendor whereName($value)
  * @method static Builder|Vendor whereNanoId($value)
  * @method static Builder|Vendor whereRating($value)
- * @method static Builder|Vendor whereScope($value)
  * @method static Builder|Vendor whereUpdatedAt($value)
  *
  * @mixin Eloquent
