@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Country;
 use App\Models\Service;
 use App\Models\Vehicle;
+use App\Models\Wish;
 use Illuminate\Database\Eloquent\Builder;
 
 class ConfigRepository
@@ -13,7 +14,7 @@ class ConfigRepository
     {
         return Service::has('vehicles')
             ->get(['id', 'name'])
-            ->map(fn (Service $service) => [
+            ->map(fn(Service $service) => [
                 'id' => $service->id,
                 'name' => $service->name,
             ])
@@ -23,10 +24,10 @@ class ConfigRepository
     public function vehicles(array $services): array
     {
         return Vehicle::with('service:id,name')
-            ->when(count($services), fn (Builder $query) => $query->whereIn('service_id', $services))
+            ->when(count($services), fn(Builder $query) => $query->whereIn('service_id', $services))
             ->get(['name', 'service_id', 'id'])
             ->groupBy('service.name')
-            ->map->map(fn (Vehicle $vehicle) => [
+            ->map->map(fn(Vehicle $vehicle) => [
                 'id' => $vehicle->id,
                 'name' => $vehicle->name,
             ])
@@ -37,10 +38,21 @@ class ConfigRepository
     {
         return Country::visible()
             ->get(['id', 'name', 'alpha2'])
-            ->map(fn (Country $country) => [
+            ->map(fn(Country $country) => [
                 'id' => $country->id,
                 'name' => $country->name,
                 'alpha2' => $country->alpha2,
+            ])
+            ->toArray();
+    }
+
+    public function wishes(): array
+    {
+        return Wish::get(['id', 'name', 'category'])
+            ->groupBy(fn($category) => $category->category->value)
+            ->map->map(fn(Wish $wish) => [
+                'id' => $wish->id,
+                'name' => $wish->name
             ])
             ->toArray();
     }
