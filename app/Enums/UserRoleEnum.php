@@ -10,14 +10,12 @@ enum UserRoleEnum: int
     case Manager = 3;
     case Employee = 4;
 
-    public static function getNames(): array
+    public static function names(): array
     {
         return [
-            self::Administrator->value => __('roles.administrator'),
-            self::Vendor->value => __('roles.vendor'),
-            self::Customer->value => __('roles.customer'),
-            //            self::Manager->value => __('roles.manager'),
-            //            self::Employee->value => __('roles.employee'),
+            self::Administrator->value => __('forms.users.roles.' . self::Administrator->value),
+            self::Vendor->value => __('forms.users.roles.' . self::Vendor->value),
+            self::Customer->value => __('forms.users.roles.' . self::Customer->value),
         ];
     }
 }

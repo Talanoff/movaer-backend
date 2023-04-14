@@ -16,6 +16,8 @@ class VendorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-office-building';
 
+    protected static ?string $navigationGroup = 'Management';
+
     public static function form(Form $form): Form
     {
         return $form

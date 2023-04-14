@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
@@ -47,6 +48,13 @@ class Country extends Model
     protected $translatable = [
         'name',
     ];
+
+    /* Relationships */
+
+    public function locations(): HasMany
+    {
+        return $this->hasMany(Location::class);
+    }
 
     /* Scopes */
 

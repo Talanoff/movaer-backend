@@ -18,6 +18,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $navigationGroup = 'Management';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -37,7 +39,7 @@ class UserResource extends Resource
                     ->hiddenOn('edit'),
                 Forms\Components\Select::make('role')
                     ->required()
-                    ->options(UserRoleEnum::getNames()),
+                    ->options(UserRoleEnum::names()),
             ]);
     }
 
@@ -52,7 +54,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('role')
-                    ->enum(UserRoleEnum::getNames()),
+                    ->enum(UserRoleEnum::names()),
                 Tables\Columns\TextColumn::make('timezone'),
                 Tables\Columns\TextColumn::make('locale'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -62,7 +64,7 @@ class UserResource extends Resource
                 Tables\Filters\Filter::make('verified')
                     ->query(fn(Builder $query): Builder => $query->whereNotNull('email_verified_at')),
                 Tables\Filters\SelectFilter::make('role')
-                    ->options(UserRoleEnum::getNames())
+                    ->options(UserRoleEnum::names())
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
