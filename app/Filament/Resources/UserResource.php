@@ -47,10 +47,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('nano_id')->label('Hash'),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID'),
+                Tables\Columns\TextColumn::make('nano_id')
+                    ->label('Hash'),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('email')
+                    ->icon('heroicon-s-mail'),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('role')

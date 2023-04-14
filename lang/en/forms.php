@@ -5,7 +5,9 @@ use App\Enums\WishCategoryEnum;
 
 return [
     'fields' => [
+        'title' => 'Title (:LOCALE)',
         'name' => 'Name (:LOCALE)',
+        'content' => 'Content (:LOCALE)',
         'visible' => 'Visible',
     ],
 

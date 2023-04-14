@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ServicesSeeder::class,
             CountriesSeeder::class,
             WishesSeeder::class,
+            PagesSeeder::class
         ]);
     }
 }
