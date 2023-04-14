@@ -16,6 +16,8 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    protected static ?string $navigationGroup = 'settings';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -27,7 +29,7 @@ class PageResource extends Resource
                             ->required(),
                         Forms\Components\RichEditor::make('content.en')
                             ->label(__('forms.fields.content', ['locale' => 'en']))
-                            ->required()
+                            ->required(),
                     ])
                     ->collapsible(),
                 Forms\Components\Section::make('NL')
@@ -37,9 +39,9 @@ class PageResource extends Resource
                             ->required(),
                         Forms\Components\RichEditor::make('content.nl')
                             ->label(__('forms.fields.content', ['locale' => 'nl']))
-                            ->required()
+                            ->required(),
                     ])
-                    ->collapsible()
+                    ->collapsible(),
             ]);
     }
 

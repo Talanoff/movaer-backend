@@ -12,14 +12,14 @@ class Wish extends Model
 
     protected $fillable = [
         'name',
-        'category'
+        'category',
     ];
 
     protected $translatable = [
-        'name'
+        'name',
     ];
 
     protected $casts = [
-        'category' => WishCategoryEnum::class
+        'category' => WishCategoryEnum::class,
     ];
 }

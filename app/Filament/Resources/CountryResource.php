@@ -52,7 +52,7 @@ class CountryResource extends Resource
             ])
             ->filters([
                 Tables\Filters\Filter::make(__('forms.fields.visible'))
-                    ->query(fn(Builder $query): Builder => $query->where('is_visible', 1)),
+                    ->query(fn (Builder $query): Builder => $query->where('is_visible', 1)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

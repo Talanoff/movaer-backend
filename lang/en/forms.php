@@ -23,6 +23,6 @@ return [
             UserRoleEnum::Manager->value => 'Manager',
             UserRoleEnum::Employee->value => 'Employee',
             UserRoleEnum::Customer->value => 'Customer',
-        ]
-    ]
+        ],
+    ],
 ];

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Page;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PagesSeeder extends Seeder
@@ -15,13 +14,13 @@ class PagesSeeder extends Seeder
     {
         $pages = [
             'Terms and Conditions',
-            'Privacy Policy'
+            'Privacy Policy',
         ];
 
         foreach ($pages as $page) {
             Page::create([
                 'title' => $page,
-                'content' => 'lorem ipsum'
+                'content' => 'lorem ipsum',
             ]);
         }
     }

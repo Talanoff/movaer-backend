@@ -15,7 +15,7 @@ class WishesSeeder extends Seeder
     {
         $items = [
             WishCategoryEnum::Common->value => [
-                'Tail lift at pick-up' .
+                'Tail lift at pick-up'.
                 'Tail lift for delivery',
                 'Indoor charging',
                 'Unloading inside',
@@ -31,18 +31,18 @@ class WishesSeeder extends Seeder
                 'Frozen transport',
                 'Electric vehicle',
                 'Call before pick-up',
-            ]
+            ],
         ];
 
         foreach ($items as $type => $values) {
             Wish::upsert(
-                array_map(static fn($value) => [
+                array_map(static fn ($value) => [
                     'name' => json_encode([
-                        'en' => $value
+                        'en' => $value,
                     ], JSON_THROW_ON_ERROR),
                     'category' => $type,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
                 ], $values),
                 ['name', 'category', 'created_at', 'updated_at']
             );

@@ -12,8 +12,7 @@ class ConfigController extends Controller
 {
     public function __construct(
         protected readonly ConfigRepository $configRepository
-    )
-    {
+    ) {
         //
     }
 

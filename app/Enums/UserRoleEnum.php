@@ -13,9 +13,9 @@ enum UserRoleEnum: int
     public static function names(): array
     {
         return [
-            self::Administrator->value => __('forms.users.roles.' . self::Administrator->value),
-            self::Vendor->value => __('forms.users.roles.' . self::Vendor->value),
-            self::Customer->value => __('forms.users.roles.' . self::Customer->value),
+            self::Administrator->value => __('forms.users.roles.'.self::Administrator->value),
+            self::Vendor->value => __('forms.users.roles.'.self::Vendor->value),
+            self::Customer->value => __('forms.users.roles.'.self::Customer->value),
         ];
     }
 }

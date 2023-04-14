@@ -65,9 +65,9 @@ class UserResource extends Resource
             ])
             ->filters([
                 Tables\Filters\Filter::make('verified')
-                    ->query(fn(Builder $query): Builder => $query->whereNotNull('email_verified_at')),
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
                 Tables\Filters\SelectFilter::make('role')
-                    ->options(UserRoleEnum::names())
+                    ->options(UserRoleEnum::names()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

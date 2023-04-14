@@ -10,8 +10,8 @@ enum WishCategoryEnum: string
     public static function names(): array
     {
         return [
-            self::Common->value => __('forms.wishes.' . self::Common->value),
-            self::Additional->value => __('forms.wishes.' . self::Additional->value),
+            self::Common->value => __('forms.wishes.'.self::Common->value),
+            self::Additional->value => __('forms.wishes.'.self::Additional->value),
         ];
     }
 }
