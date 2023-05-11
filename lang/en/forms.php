@@ -19,9 +19,6 @@ return [
     'users' => [
         'roles' => [
             UserRoleEnum::Administrator->value => 'Administrator',
-            UserRoleEnum::Vendor->value => 'Vendor',
-            UserRoleEnum::Manager->value => 'Manager',
-            UserRoleEnum::Employee->value => 'Employee',
             UserRoleEnum::Customer->value => 'Customer',
         ],
     ],

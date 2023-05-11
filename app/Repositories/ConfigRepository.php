@@ -26,7 +26,7 @@ class ConfigRepository
         return Vehicle::with('service:id,name')
             ->when(count($services), fn (Builder $query) => $query->whereIn('service_id', $services))
             ->get(['name', 'service_id', 'id'])
-            ->groupBy('service.name')
+            ->groupBy('service.id')
             ->map->map(fn (Vehicle $vehicle) => [
                 'id' => $vehicle->id,
                 'name' => $vehicle->name,

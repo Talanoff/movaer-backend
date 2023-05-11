@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Database\Factories\VendorFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,38 +21,56 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property int $id
  * @property string $nano_id
  * @property string $name
+ * @property string $email
+ * @property string $phone
+ * @property string $iban
+ * @property string|null $vat
+ * @property string|null $commerce_no
+ * @property int|null $country_id
+ * @property string $post_code
+ * @property string $street
+ * @property string $house_no
  * @property string|null $about
- * @property string|null $address
- * @property string $employees
+ * @property string|null $employees
  * @property float|null $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, ChatRoom> $chatRooms
+ * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
- * @property-read Collection<int, Feedback> $feedback
+ * @property-read Collection<int, \App\Models\Feedback> $feedback
  * @property-read int|null $feedback_count
- * @property-read Collection<int, Order> $orders
+ * @property-read Collection<int, \App\Models\Location> $locations
+ * @property-read int|null $locations_count
+ * @property-read Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
- * @property-read Collection<int, Service> $services
+ * @property-read Collection<int, \App\Models\Service> $services
  * @property-read int|null $services_count
- * @property-read Collection<int, User> $users
+ * @property-read Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
- * @property-read Collection<int, Vehicle> $vehicles
+ * @property-read Collection<int, \App\Models\Vehicle> $vehicles
  * @property-read int|null $vehicles_count
  *
- * @method static VendorFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\VendorFactory factory($count = null, $state = [])
  * @method static Builder|Vendor newModelQuery()
  * @method static Builder|Vendor newQuery()
  * @method static Builder|Vendor query()
  * @method static Builder|Vendor whereAbout($value)
- * @method static Builder|Vendor whereAddress($value)
+ * @method static Builder|Vendor whereCommerceNo($value)
+ * @method static Builder|Vendor whereCountryId($value)
  * @method static Builder|Vendor whereCreatedAt($value)
+ * @method static Builder|Vendor whereEmail($value)
  * @method static Builder|Vendor whereEmployees($value)
+ * @method static Builder|Vendor whereHouseNo($value)
+ * @method static Builder|Vendor whereIban($value)
  * @method static Builder|Vendor whereId($value)
  * @method static Builder|Vendor whereName($value)
  * @method static Builder|Vendor whereNanoId($value)
+ * @method static Builder|Vendor wherePhone($value)
+ * @method static Builder|Vendor wherePostCode($value)
  * @method static Builder|Vendor whereRating($value)
+ * @method static Builder|Vendor whereStreet($value)
  * @method static Builder|Vendor whereUpdatedAt($value)
+ * @method static Builder|Vendor whereVat($value)
  *
  * @mixin Eloquent
  */
@@ -62,10 +80,18 @@ class Vendor extends Model
 
     protected $fillable = [
         'name',
+        'iban',
+        'vat',
+        'commerce_no',
         'about',
-        'address',
         'employees',
         'rating',
+        'email',
+        'phone',
+        'country_id',
+        'post_code',
+        'street',
+        'house_no',
     ];
 
     public function getNanoIdOptions(): NanoIdOptions
@@ -77,7 +103,7 @@ class Vendor extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)
+        return $this->belongsToMany(User::class, 'vendor_users')
             ->withPivot('role', 'joined_at')
             ->using(UserVendor::class);
     }
@@ -94,16 +120,31 @@ class Vendor extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class, 'vendor_services');
     }
 
     public function vehicles(): BelongsToMany
     {
-        return $this->belongsToMany(Vehicle::class)->withPivot('quantity');
+        return $this->belongsToMany(Vehicle::class, 'vendor_vehicles')->withPivot('quantity');
+    }
+
+    public function locations(): BelongsToMany
+    {
+        return $this->belongsToMany(Location::class, 'vendor_locations');
     }
 
     public function feedback(): HasManyThrough
     {
         return $this->hasManyThrough(Feedback::class, Order::class);
+    }
+
+    /* Accessors & Mutators */
+
+    protected function phone(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value): string => "+$value",
+            set: static fn ($value) => preg_replace('/\D/', '', $value)
+        );
     }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\ChatMessageOfferStatusEnum;
 use App\Enums\ChatMessageTypeEnum;
-use Database\Factories\ChatMessageFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,10 +29,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon|null $updated_at
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read ChatRoom $room
- * @property-read User $user
+ * @property-read \App\Models\ChatRoom $room
+ * @property-read \App\Models\User $user
  *
- * @method static ChatMessageFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\ChatMessageFactory factory($count = null, $state = [])
  * @method static Builder|ChatMessage newModelQuery()
  * @method static Builder|ChatMessage newQuery()
  * @method static Builder|ChatMessage query()

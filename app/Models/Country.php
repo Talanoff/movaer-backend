@@ -19,6 +19,8 @@ use Spatie\Translatable\HasTranslations;
  * @property int $is_visible
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Location> $locations
+ * @property-read int|null $locations_count
  *
  * @method static Builder|Country newModelQuery()
  * @method static Builder|Country newQuery()

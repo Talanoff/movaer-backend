@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRoleEnum;
-use Database\Factories\UserFactory;
 use Eloquent;
 use Filament\Models\Contracts\FilamentUser;
 use Hash;
@@ -35,6 +34,7 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property string $nano_id
  * @property string $name
  * @property string $email
+ * @property string $phone
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property UserRoleEnum $role
@@ -43,18 +43,18 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, ChatRoom> $chatRooms
+ * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
  * @property-read DatabaseNotificationCollection<int, DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read Collection<int, Order> $orders
+ * @property-read Collection<int, \App\Models\Order> $orders
  * @property-read int|null $orders_count
- * @property-read Collection<int, Vendor> $vendors
+ * @property-read Collection<int, \App\Models\Vendor> $vendors
  * @property-read int|null $vendors_count
  *
- * @method static UserFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
@@ -66,6 +66,7 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static Builder|User whereName($value)
  * @method static Builder|User whereNanoId($value)
  * @method static Builder|User wherePassword($value)
+ * @method static Builder|User wherePhone($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereRole($value)
  * @method static Builder|User whereTimezone($value)
@@ -81,6 +82,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
         'uid',
         'name',
         'email',
+        'phone',
         'password',
         'role',
         'timezone',
@@ -106,7 +108,7 @@ class User extends Authenticatable implements HasMedia, FilamentUser
 
     public function vendors(): BelongsToMany
     {
-        return $this->belongsToMany(Vendor::class)
+        return $this->belongsToMany(Vendor::class, 'vendor_users')
             ->withPivot('role', 'joined_at')
             ->using(UserVendor::class);
     }
@@ -146,6 +148,14 @@ class User extends Authenticatable implements HasMedia, FilamentUser
     {
         return Attribute::make(
             set: static fn ($value) => Hash::make($value)
+        );
+    }
+
+    protected function phone(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value): string => "+$value",
+            set: static fn ($value) => preg_replace('/\D/', '', $value)
         );
     }
 }

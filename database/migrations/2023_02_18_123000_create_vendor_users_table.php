@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Vehicle;
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicle_vendor', static function (Blueprint $table) {
+        Schema::create('vendor_users', static function (Blueprint $table) {
             $table->foreignIdFor(Vendor::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Vehicle::class)->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('quantity')->nullable();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->tinyInteger('role');
+            $table->timestamp('joined_at')->useCurrent();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicle_vendor');
+        Schema::dropIfExists('vendor_users');
     }
 };

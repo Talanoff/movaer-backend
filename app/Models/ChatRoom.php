@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Factories\ChatRoomFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -25,13 +24,13 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, ChatMessage> $messages
+ * @property-read Collection<int, \App\Models\ChatMessage> $messages
  * @property-read int|null $messages_count
- * @property-read Order|null $order
- * @property-read User $user
- * @property-read Vendor|null $vendor
+ * @property-read \App\Models\Order|null $order
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\Vendor|null $vendor
  *
- * @method static ChatRoomFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\ChatRoomFactory factory($count = null, $state = [])
  * @method static Builder|ChatRoom newModelQuery()
  * @method static Builder|ChatRoom newQuery()
  * @method static Builder|ChatRoom query()

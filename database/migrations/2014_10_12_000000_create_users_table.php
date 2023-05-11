@@ -16,11 +16,12 @@ return new class extends Migration
             $table->char('nano_id', 8)->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('role');
+            $table->unsignedTinyInteger('role');
             $table->string('timezone', 50)->default(config('app.timezone'));
-            $table->string('locale', 8)->default(config('app.locale'));
+            $table->char('locale', 2)->default(config('app.locale'));
             $table->rememberToken();
             $table->timestamps();
         });

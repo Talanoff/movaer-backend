@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('locations', static function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Country::class)->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->json('name');
             $table->timestamps();
         });
     }

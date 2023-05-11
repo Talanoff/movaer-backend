@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Database\Factories\FeedbackFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,10 +20,10 @@ use Illuminate\Support\Carbon;
  * @property string|null $message
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Order $order
- * @property-read Vendor|null $vendor
+ * @property-read \App\Models\Order $order
+ * @property-read \App\Models\Vendor|null $vendor
  *
- * @method static FeedbackFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\FeedbackFactory factory($count = null, $state = [])
  * @method static Builder|Feedback newModelQuery()
  * @method static Builder|Feedback newQuery()
  * @method static Builder|Feedback query()

@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\DeliveryCategoryEnum;
 use App\Enums\DeliveryLocationEnum;
 use App\Enums\OrderStatusEnum;
-use Database\Factories\OrderFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,25 +35,27 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property int|null $goods_number
  * @property int|null $goods_weight
  * @property string|null $description
+ * @property int|null $country_from_id
+ * @property int|null $country_to_id
  * @property string $address_from
  * @property string $address_to
  * @property Carbon $pickup_at
  * @property Carbon $delivery_at
  * @property DeliveryLocationEnum $pickup_location_type
  * @property DeliveryLocationEnum $delivery_location_type
- * @property object $options
+ * @property object $details
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read Collection<int, ChatRoom> $chatRooms
+ * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
- * @property-read Feedback|null $feedback
+ * @property-read \App\Models\Feedback|null $feedback
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read User|null $user
- * @property-read Vendor|null $vendor
+ * @property-read \App\Models\User|null $user
+ * @property-read \App\Models\Vendor|null $vendor
  *
- * @method static OrderFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\OrderFactory factory($count = null, $state = [])
  * @method static Builder|Order newModelQuery()
  * @method static Builder|Order newQuery()
  * @method static Builder|Order onlyTrashed()
@@ -62,16 +63,18 @@ use Talanov\Nanoid\NanoIdOptions;
  * @method static Builder|Order whereAddressFrom($value)
  * @method static Builder|Order whereAddressTo($value)
  * @method static Builder|Order whereCategory($value)
+ * @method static Builder|Order whereCountryFromId($value)
+ * @method static Builder|Order whereCountryToId($value)
  * @method static Builder|Order whereCreatedAt($value)
  * @method static Builder|Order whereDeletedAt($value)
  * @method static Builder|Order whereDeliveryAt($value)
  * @method static Builder|Order whereDeliveryLocationType($value)
  * @method static Builder|Order whereDescription($value)
+ * @method static Builder|Order whereDetails($value)
  * @method static Builder|Order whereGoodsNumber($value)
  * @method static Builder|Order whereGoodsWeight($value)
  * @method static Builder|Order whereId($value)
  * @method static Builder|Order whereNanoId($value)
- * @method static Builder|Order whereOptions($value)
  * @method static Builder|Order wherePickupAt($value)
  * @method static Builder|Order wherePickupLocationType($value)
  * @method static Builder|Order whereStatus($value)

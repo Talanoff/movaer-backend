@@ -8,7 +8,7 @@ use Response;
 
 class PageController extends Controller
 {
-    public function show(Page $page)
+    public function __invoke(Page $page)
     {
         return Response::json(
             $page->only('title', 'content')
