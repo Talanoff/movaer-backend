@@ -31,7 +31,12 @@ class VendorService
         $items = [];
 
         foreach ($locations as $location) {
-            $items[] = Location::updateOrCreate($location->toArray())->getKey();
+            $item = Location::firstOrCreate([
+                'country_id' => $location->country,
+                'name' => $location->location
+            ]);
+
+            $items[$item->getKey()] = ['is_main' => $location->isMain];
         }
 
         $vendor->locations()->sync($items);
@@ -40,8 +45,8 @@ class VendorService
     public function assignVehicles(Vendor $vendor, array $vehicles): void
     {
         $attachment = collect($vehicles)->values()
-            ->mapWithKeys(fn ($value) => $value)
-            ->mapWithKeys(fn ($value) => [$value['key'] => ['quantity' => (int) $value['value']]]);
+            ->flatten()
+            ->mapWithKeys(fn($value) => [$value['key'] => ['quantity' => (int)$value['value']]]);
 
         $vendor->services()->sync(array_keys($vehicles));
         $vendor->vehicles()->sync($attachment);

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\UserVendorRoleEnum;
+use Database\Factories\VendorFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -35,22 +37,22 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property float|null $rating
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
+ * @property-read Collection<int, ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
- * @property-read Collection<int, \App\Models\Feedback> $feedback
+ * @property-read Collection<int, Feedback> $feedback
  * @property-read int|null $feedback_count
- * @property-read Collection<int, \App\Models\Location> $locations
+ * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
- * @property-read Collection<int, \App\Models\Order> $orders
+ * @property-read Collection<int, Order> $orders
  * @property-read int|null $orders_count
- * @property-read Collection<int, \App\Models\Service> $services
+ * @property-read Collection<int, Service> $services
  * @property-read int|null $services_count
- * @property-read Collection<int, \App\Models\User> $users
+ * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
- * @property-read Collection<int, \App\Models\Vehicle> $vehicles
+ * @property-read Collection<int, Vehicle> $vehicles
  * @property-read int|null $vehicles_count
  *
- * @method static \Database\Factories\VendorFactory factory($count = null, $state = [])
+ * @method static VendorFactory factory($count = null, $state = [])
  * @method static Builder|Vendor newModelQuery()
  * @method static Builder|Vendor newQuery()
  * @method static Builder|Vendor query()
@@ -88,10 +90,10 @@ class Vendor extends Model
         'rating',
         'email',
         'phone',
-        'country_id',
         'post_code',
         'street',
         'house_no',
+        'address'
     ];
 
     public function getNanoIdOptions(): NanoIdOptions
@@ -106,6 +108,11 @@ class Vendor extends Model
         return $this->belongsToMany(User::class, 'vendor_users')
             ->withPivot('role', 'joined_at')
             ->using(UserVendor::class);
+    }
+
+    public function owner(): BelongsToMany
+    {
+        return $this->users()->wherePivot('role', UserVendorRoleEnum::Owner);
     }
 
     public function orders(): HasMany
@@ -130,7 +137,7 @@ class Vendor extends Model
 
     public function locations(): BelongsToMany
     {
-        return $this->belongsToMany(Location::class, 'vendor_locations');
+        return $this->belongsToMany(Location::class, 'vendor_locations')->withPivot('is_main');
     }
 
     public function feedback(): HasManyThrough
@@ -143,8 +150,8 @@ class Vendor extends Model
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value): string => "+$value",
-            set: static fn ($value) => preg_replace('/\D/', '', $value)
+            get: static fn($value): string => "+$value",
+            set: static fn($value) => preg_replace('/\D/', '', $value)
         );
     }
 }

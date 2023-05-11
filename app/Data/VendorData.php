@@ -21,13 +21,7 @@ class VendorData extends Data
 
     public string $vat;
 
-    #[MapOutputName('country_id')]
-    public int $country;
-
-    public string $street;
-
-    #[MapOutputName('house_no')]
-    public string $houseNumber;
+    public string $address;
 
     #[MapOutputName('post_code')]
     public string $postCode;

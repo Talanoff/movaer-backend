@@ -11,5 +11,8 @@ class VendorLocationData extends Data
     public int $country;
 
     #[MapOutputName('name')]
-    public string $city;
+    public string $location;
+
+    #[MapOutputName('is_main')]
+    public int $isMain = 0;
 }
