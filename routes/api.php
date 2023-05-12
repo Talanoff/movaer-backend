@@ -9,7 +9,7 @@ Route::get('vehicles', [ConfigController::class, 'vehicles']);
 Route::get('countries', [ConfigController::class, 'countries']);
 Route::get('wishes', [ConfigController::class, 'wishes']);
 
-Route::post('questionnaire/customer', [QuestionnaireController::class, 'customer']);
+Route::post('questionnaire/order', [QuestionnaireController::class, 'order']);
 Route::post('questionnaire/vendor', [QuestionnaireController::class, 'vendor']);
 
 Route::get('pages/{page}', PageController::class);

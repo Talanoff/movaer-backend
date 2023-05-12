@@ -93,7 +93,7 @@ class Vendor extends Model
         'post_code',
         'street',
         'house_no',
-        'address'
+        'address',
     ];
 
     public function getNanoIdOptions(): NanoIdOptions
@@ -105,7 +105,7 @@ class Vendor extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'vendor_users')
+        return $this->belongsToMany(User::class)
             ->withPivot('role', 'joined_at')
             ->using(UserVendor::class);
     }
@@ -127,17 +127,20 @@ class Vendor extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'vendor_services');
+        return $this->belongsToMany(Service::class)->distinct();
     }
 
     public function vehicles(): BelongsToMany
     {
-        return $this->belongsToMany(Vehicle::class, 'vendor_vehicles')->withPivot('quantity');
+        return $this->belongsToMany(Vehicle::class)
+            ->withPivot('quantity', 'service_id')
+            ->using(VehicleVendor::class);
     }
 
     public function locations(): BelongsToMany
     {
-        return $this->belongsToMany(Location::class, 'vendor_locations')->withPivot('is_main');
+        return $this->belongsToMany(Location::class)
+            ->withPivot('is_default');
     }
 
     public function feedback(): HasManyThrough
@@ -150,8 +153,8 @@ class Vendor extends Model
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn($value): string => "+$value",
-            set: static fn($value) => preg_replace('/\D/', '', $value)
+            get: static fn ($value): string => "+$value",
+            set: static fn ($value) => preg_replace('/\D/', '', $value)
         );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Service;
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendor_services', static function (Blueprint $table) {
-            $table->foreignIdFor(Service::class)->constrained()->cascadeOnDelete();
+        Schema::create('user_vendor', static function (Blueprint $table) {
             $table->foreignIdFor(Vendor::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->tinyInteger('role');
+            $table->timestamp('joined_at')->useCurrent();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendor_services');
+        Schema::dropIfExists('user_vendor');
     }
 };

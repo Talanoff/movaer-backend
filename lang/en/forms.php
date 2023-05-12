@@ -8,7 +8,12 @@ return [
         'title' => 'Title (:LOCALE)',
         'name' => 'Name (:LOCALE)',
         'content' => 'Content (:LOCALE)',
+        'simple_name' => 'Name',
         'visible' => 'Visible',
+        'quantity' => 'Quantity',
+        'vehicle' => 'Vehicle',
+        'is_default' => 'Use as default',
+        'role' => 'Role',
     ],
 
     'wishes' => [

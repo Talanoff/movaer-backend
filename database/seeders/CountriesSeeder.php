@@ -25,6 +25,7 @@ class CountriesSeeder extends Seeder
                     'nl' => $nl[$country->alpha3]->name,
                 ],
                 'alpha2' => $country->alpha2,
+                'is_visible' => in_array($country->alpha2, ['nl', 'de', 'be', 'fr', 'gb', 'sk', 'si', 'es', 'uk']),
             ]);
         }
     }

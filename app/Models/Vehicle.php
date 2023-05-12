@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\VehicleFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,11 +21,11 @@ use Spatie\Translatable\HasTranslations;
  * @property array $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \App\Models\Service $service
- * @property-read Collection<int, \App\Models\Vendor> $vendors
+ * @property-read Service $service
+ * @property-read Collection<int, Vendor> $vendors
  * @property-read int|null $vendors_count
  *
- * @method static \Database\Factories\VehicleFactory factory($count = null, $state = [])
+ * @method static VehicleFactory factory($count = null, $state = [])
  * @method static Builder|Vehicle newModelQuery()
  * @method static Builder|Vehicle newQuery()
  * @method static Builder|Vehicle query()
@@ -58,6 +59,8 @@ class Vehicle extends Model
 
     public function vendors(): BelongsToMany
     {
-        return $this->belongsToMany(Vendor::class)->withPivot('quantity');
+        return $this->belongsToMany(Vendor::class)
+            ->withPivot('quantity', 'service_id')
+            ->using(VehicleVendor::class);
     }
 }

@@ -18,9 +18,9 @@ use Spatie\Translatable\HasTranslations;
  * @property array $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection<int, \App\Models\Vehicle> $vehicles
+ * @property-read Collection<int, Vehicle> $vehicles
  * @property-read int|null $vehicles_count
- * @property-read Collection<int, \App\Models\Vendor> $vendors
+ * @property-read Collection<int, Vendor> $vendors
  * @property-read int|null $vendors_count
  *
  * @method static Builder|Service newModelQuery()
@@ -54,6 +54,7 @@ class Service extends Model
 
     public function vendors(): BelongsToMany
     {
-        return $this->belongsToMany(Vendor::class, 'vendor_services');
+        return $this->belongsToMany(Vendor::class)
+            ->using(VehicleVendor::class);
     }
 }

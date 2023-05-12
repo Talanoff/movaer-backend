@@ -15,18 +15,20 @@ use Response;
 
 class QuestionnaireController extends Controller
 {
-    public function customer(CustomerBookingRequest $request): JsonResponse
+    public function order(CustomerBookingRequest $request): JsonResponse
     {
 
-        return Response::json();
+        return Response::json([
+            'a' => $request->safe()->all(),
+            'v' => $request->validated(),
+        ]);
     }
 
     public function vendor(
         VendorJoinRequest $request,
-        UserService       $userService,
-        VendorService     $vendorService,
-    ): JsonResponse
-    {
+        UserService $userService,
+        VendorService $vendorService,
+    ): JsonResponse {
         $user = $userService->register(UserData::from($request->validated()));
         $vendor = $vendorService->register(VendorData::from($request->validated()), $user);
 

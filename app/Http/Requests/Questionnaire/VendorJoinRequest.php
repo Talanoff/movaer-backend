@@ -21,7 +21,7 @@ class VendorJoinRequest extends FormRequest
             'companyName' => ['required', 'string', 'max:191'],
             'commerceNumber' => ['required', 'string', 'max:191'],
             'iban' => ['required', 'string', 'max:33'],
-            'vat' => ['required', 'string'],
+            'vat' => ['required', 'numeric'],
             'country' => ['required', 'numeric', 'exists:countries,id'],
             'address' => ['required', 'string'],
             'location' => ['required', 'string'],
@@ -48,8 +48,8 @@ class VendorJoinRequest extends FormRequest
             'role' => UserRoleEnum::Customer,
             'locale' => $this->header('X-Locale', config('app.locale')),
             'locations' => $this->collect('locations')->merge([
-                $this->only(['country', 'location']) + ['isMain' => 1]
-            ])->toArray()
+                $this->only(['country', 'location']) + ['default' => 1],
+            ])->toArray(),
         ]);
     }
 }

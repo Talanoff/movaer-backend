@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
-use Spatie\Translatable\HasTranslations;
+use Str;
 
 /**
  * App\Models\Location
@@ -42,5 +44,15 @@ class Location extends Model
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class)->visible();
+    }
+
+    public function vendors(): BelongsToMany
+    {
+        return $this->belongsToMany(Vendor::class);
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::set(static fn ($value) => Str::title($value));
     }
 }

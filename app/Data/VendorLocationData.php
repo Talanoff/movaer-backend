@@ -13,6 +13,6 @@ class VendorLocationData extends Data
     #[MapOutputName('name')]
     public string $location;
 
-    #[MapOutputName('is_main')]
-    public int $isMain = 0;
+    #[MapOutputName('is_default')]
+    public int $default = 0;
 }

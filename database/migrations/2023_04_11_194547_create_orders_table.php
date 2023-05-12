@@ -23,6 +23,7 @@ return new class extends Migration
             $table->tinyInteger('category');
             $table->unsignedSmallInteger('goods_number')->nullable();
             $table->unsignedSmallInteger('goods_weight')->nullable();
+            $table->string('goods_type')->nullable();
             $table->text('description')->nullable();
             $table->foreignIdFor(Country::class, 'country_from_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->foreignIdFor(Country::class, 'country_to_id')->nullable()->constrained('countries')->nullOnDelete();
