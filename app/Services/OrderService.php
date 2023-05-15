@@ -15,14 +15,14 @@ class OrderService
 
         $orderAttributes = OrderData::from($data);
         $orderAttributes->details = OrderDetailsData::from(
-            $data->merge([
+            $data->merge(!$data->get('registerCheckbox') ? [
                 'contact' => $user->only([
                     'name', 'email', 'phone', 'locale'
                 ])
-            ])
+            ] : [])
         );
 
-        $order = Order::fill($orderAttributes->toArray());
+        $order = new Order($orderAttributes->toArray());
 
         if ($data->get('registerCheckbox')) {
             tap($user)->save();
