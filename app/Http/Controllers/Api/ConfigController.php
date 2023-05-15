@@ -12,7 +12,8 @@ class ConfigController extends Controller
 {
     public function __construct(
         protected readonly ConfigRepository $configRepository
-    ) {
+    )
+    {
         //
     }
 
@@ -39,10 +40,11 @@ class ConfigController extends Controller
         );
     }
 
-    public function wishes(): JsonResponse
+    public function booking(): JsonResponse
     {
-        return Response::json(
-            $this->configRepository->wishes()
-        );
+        return Response::json([
+            'wishes' => $this->configRepository->wishes(),
+            'locationTypes' => $this->configRepository->locationTypes()
+        ]);
     }
 }

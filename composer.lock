@@ -800,16 +800,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/app.git",
-                "reference": "0719a1fcebcad120dd4e254938cfb08470c90105"
+                "reference": "dd33a5dae80c39fa63d4406ba74726c6ef9ca63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/app/zipball/0719a1fcebcad120dd4e254938cfb08470c90105",
-                "reference": "0719a1fcebcad120dd4e254938cfb08470c90105",
+                "url": "https://api.github.com/repos/filamentphp/app/zipball/dd33a5dae80c39fa63d4406ba74726c6ef9ca63b",
+                "reference": "dd33a5dae80c39fa63d4406ba74726c6ef9ca63b",
                 "shasum": ""
             },
             "require": {
@@ -859,20 +859,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-05-08T15:39:08+00:00"
+            "time": "2023-05-13T18:45:05+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "49bafbf87f0d7f23e7b62a6d40591fd3ea81a55b"
+                "reference": "bac884ddd8017ff5acf1ca7d3841a7cb4150bf81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/49bafbf87f0d7f23e7b62a6d40591fd3ea81a55b",
-                "reference": "49bafbf87f0d7f23e7b62a6d40591fd3ea81a55b",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/bac884ddd8017ff5acf1ca7d3841a7cb4150bf81",
+                "reference": "bac884ddd8017ff5acf1ca7d3841a7cb4150bf81",
                 "shasum": ""
             },
             "require": {
@@ -917,11 +917,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-05-08T09:55:16+00:00"
+            "time": "2023-05-13T18:44:56+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -974,7 +974,7 @@
         },
         {
             "name": "filament/spatie-laravel-translatable-plugin",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/spatie-laravel-translatable-plugin.git",
@@ -1020,16 +1020,16 @@
         },
         {
             "name": "filament/support",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "1a411197122524886c81a74c7044258d64d56308"
+                "reference": "e75e02a76edd959304cdbea7815586b720f8d308"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/1a411197122524886c81a74c7044258d64d56308",
-                "reference": "1a411197122524886c81a74c7044258d64d56308",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/e75e02a76edd959304cdbea7815586b720f8d308",
+                "reference": "e75e02a76edd959304cdbea7815586b720f8d308",
                 "shasum": ""
             },
             "require": {
@@ -1066,20 +1066,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-05-04T23:08:15+00:00"
+            "time": "2023-05-13T07:21:02+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v2.17.38",
+            "version": "v2.17.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "b23b5cc95c7b1afb650b366545942b1ccad993af"
+                "reference": "7389f819d057262642295a22fb7d26e92e0b2ab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/b23b5cc95c7b1afb650b366545942b1ccad993af",
-                "reference": "b23b5cc95c7b1afb650b366545942b1ccad993af",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/7389f819d057262642295a22fb7d26e92e0b2ab6",
+                "reference": "7389f819d057262642295a22fb7d26e92e0b2ab6",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1122,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-05-08T09:55:33+00:00"
+            "time": "2023-05-13T07:21:08+00:00"
         },
         {
             "name": "flowframe/laravel-trend",
@@ -1333,16 +1333,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.5.1",
+            "version": "7.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9"
+                "reference": "733dd89533dd371a0987172727df15f500dab0ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b964ca597e86b752cd994f27293e9fa6b6a95ed9",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/733dd89533dd371a0987172727df15f500dab0ef",
+                "reference": "733dd89533dd371a0987172727df15f500dab0ef",
                 "shasum": ""
             },
             "require": {
@@ -1373,9 +1373,6 @@
                 "bamarni-bin": {
                     "bin-links": true,
                     "forward-command": false
-                },
-                "branch-alias": {
-                    "dev-master": "7.5-dev"
                 }
             },
             "autoload": {
@@ -1441,7 +1438,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.5.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.6.0"
             },
             "funding": [
                 {
@@ -1457,7 +1454,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-17T16:30:08+00:00"
+            "time": "2023-05-14T11:23:39+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1829,16 +1826,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.10.0",
+            "version": "v10.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0da22a8d179f79b49d4e71f4822f759651f35012"
+                "reference": "be0478dea96a6619bb77676f36f67c1500846b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0da22a8d179f79b49d4e71f4822f759651f35012",
-                "reference": "0da22a8d179f79b49d4e71f4822f759651f35012",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/be0478dea96a6619bb77676f36f67c1500846b17",
+                "reference": "be0478dea96a6619bb77676f36f67c1500846b17",
                 "shasum": ""
             },
             "require": {
@@ -2025,7 +2022,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-05-09T13:08:05+00:00"
+            "time": "2023-05-11T13:20:25+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -4563,16 +4560,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "4c3c31d7d9a515125bfa219099c4df563e4422a8"
+                "reference": "2ca317a41b52df78c48602f227da383ff8683b21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/4c3c31d7d9a515125bfa219099c4df563e4422a8",
-                "reference": "4c3c31d7d9a515125bfa219099c4df563e4422a8",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/2ca317a41b52df78c48602f227da383ff8683b21",
+                "reference": "2ca317a41b52df78c48602f227da383ff8683b21",
                 "shasum": ""
             },
             "require": {
@@ -4634,7 +4631,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/3.5.0"
+                "source": "https://github.com/spatie/laravel-data/tree/3.5.1"
             },
             "funding": [
                 {
@@ -4642,7 +4639,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-05T15:24:41+00:00"
+            "time": "2023-05-12T12:12:37+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",

@@ -9,16 +9,6 @@ enum DeliveryCategoryEnum: int
     case Pallet = 2;
     case Various = 3;
 
-    public function getIconName(): string
-    {
-        return match ($this) {
-            self::OnePackage => 'package',
-            self::ManyPackages => 'trolley',
-            self::Pallet => 'pallet',
-            self::Various => 'warehouse',
-        };
-    }
-
     public function getName(): string
     {
         return match ($this) {
@@ -26,6 +16,16 @@ enum DeliveryCategoryEnum: int
             self::ManyPackages => __('Many packages'),
             self::Pallet => __('Pallet(s)'),
             self::Various => __('Various goods'),
+        };
+    }
+
+    public static function fromRequest(string $name): DeliveryCategoryEnum
+    {
+        return match ($name) {
+            'one' => self::OnePackage,
+            'many' => self::ManyPackages,
+            'pallets' => self::Pallet,
+            'various' => self::Various
         };
     }
 }

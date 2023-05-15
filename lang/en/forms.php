@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\UserRoleEnum;
 use App\Enums\WishCategoryEnum;
 
@@ -19,6 +20,12 @@ return [
     'wishes' => [
         WishCategoryEnum::Additional->value => 'Additional',
         WishCategoryEnum::Common->value => 'Common',
+    ],
+
+    'location_types' => [
+        DeliveryLocationTypeEnum::LivingPlace->value => 'Living place',
+        DeliveryLocationTypeEnum::OfficeBuilding->value => 'Office building',
+        DeliveryLocationTypeEnum::StorageShed->value => 'Storage shed',
     ],
 
     'users' => [

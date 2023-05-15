@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\DeliveryCategoryEnum;
-use App\Enums\DeliveryLocationEnum;
+use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use Exception;
@@ -36,8 +36,8 @@ class OrderFactory extends Factory
             'address_to' => $this->faker->address,
             'pickup_at' => today()->addDays($pickUpDate),
             'delivery_at' => today()->addDays($pickUpDate + random_int(1, 3)),
-            'pickup_location_type' => DeliveryLocationEnum::cases()[random_int(0, 2)],
-            'delivery_location_type' => DeliveryLocationEnum::cases()[random_int(0, 2)],
+            'pickup_location_type' => DeliveryLocationTypeEnum::cases()[random_int(0, 2)],
+            'delivery_location_type' => DeliveryLocationTypeEnum::cases()[random_int(0, 2)],
             'options' => [],
         ];
     }

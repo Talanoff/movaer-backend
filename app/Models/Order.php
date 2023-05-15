@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DeliveryCategoryEnum;
-use App\Enums\DeliveryLocationEnum;
+use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
 use Database\Factories\OrderFactory;
 use Eloquent;
@@ -42,8 +42,8 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property string $address_to
  * @property Carbon $pickup_at
  * @property Carbon $delivery_at
- * @property DeliveryLocationEnum $pickup_location_type
- * @property DeliveryLocationEnum $delivery_location_type
+ * @property DeliveryLocationTypeEnum $pickup_location_type
+ * @property DeliveryLocationTypeEnum $delivery_location_type
  * @property object $details
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -97,7 +97,7 @@ class Order extends Model implements HasMedia
         'goods_number',
         'goods_weight',
         'goods_type',
-        'description',
+        'message',
         'address_from',
         'address_to',
         'pickup_at',
@@ -112,8 +112,8 @@ class Order extends Model implements HasMedia
     protected $casts = [
         'status' => OrderStatusEnum::class,
         'category' => DeliveryCategoryEnum::class,
-        'pickup_location_type' => DeliveryLocationEnum::class,
-        'delivery_location_type' => DeliveryLocationEnum::class,
+        'pickup_location_type' => DeliveryLocationTypeEnum::class,
+        'delivery_location_type' => DeliveryLocationTypeEnum::class,
         'pickup_at' => 'date',
         'delivery_at' => 'date',
         'details' => 'object',
