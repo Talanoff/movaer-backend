@@ -34,7 +34,7 @@ class VendorJoinRequest extends FormRequest
             'name' => ['required', 'string'],
             'personalPhone' => ['required', 'string'],
             'personalEmail' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', Password::min(6)],
+            'password' => ['required', Password::defaults()],
             'role' => ['required', new Enum(UserRoleEnum::class)],
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
 

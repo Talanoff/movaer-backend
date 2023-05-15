@@ -48,7 +48,7 @@ class CustomerBookingRequest extends FormRequest
                 'name' => ['required', 'string', 'max:191'],
                 'email' => ['required', 'email', 'unique:users,email'],
                 'phone' => ['required', 'string', 'max:20'],
-                'password' => ['required', Password::min(6)],
+                'password' => ['required', Password::defaults()],
             ]);
         }
 
