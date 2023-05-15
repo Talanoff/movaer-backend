@@ -13,10 +13,6 @@ class OrderService
     {
         $user = new User(UserData::from($data)->toArray());
 
-        if ($data->get('registerCheckbox')) {
-            tap($user)->save();
-        }
-
         $orderAttributes = OrderData::from($data);
         $orderAttributes->details = OrderDetailsData::from(
             $data->merge([
@@ -26,6 +22,15 @@ class OrderService
             ])
         );
 
-        return Order::create($orderAttributes->toArray());
+        $order = Order::fill($orderAttributes->toArray());
+
+        if ($data->get('registerCheckbox')) {
+            tap($user)->save();
+            $order->user_id = $user->getKey();
+        }
+
+        tap($order)->save();
+
+        return $order;
     }
 }
