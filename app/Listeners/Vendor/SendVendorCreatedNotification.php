@@ -9,7 +9,7 @@ use Mail;
 
 class SendVendorCreatedNotification
 {
-    public function handle(object $event): void
+    public function handle(VendorCreated $event): void
     {
         $admins = User::where('role', UserRoleEnum::Administrator)->pluck('email');
 

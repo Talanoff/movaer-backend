@@ -11,7 +11,7 @@ class VendorCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(private readonly Vendor $vendor)
+    public function __construct(public readonly Vendor $vendor)
     {
         //
     }
