@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\Order\OrderCreated;
+use App\Events\Vendor\VendorCreated;
+use App\Listeners\Order\SendOrderCreatedNotification;
+use App\Listeners\Vendor\SendVendorCreatedNotification;
+use App\Listeners\Vendor\SendVendorInvitationEmail;
 use App\Models\Feedback;
 use App\Observers\FeedbackObserver;
 use Illuminate\Auth\Events\Registered;
@@ -18,6 +23,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        OrderCreated::class => [
+            SendOrderCreatedNotification::class
+        ],
+
+        VendorCreated::class => [
+            SendVendorCreatedNotification::class,
+            SendVendorInvitationEmail::class
         ],
     ];
 

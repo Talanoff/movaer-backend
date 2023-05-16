@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\Order;
 
-use App\Models\Vendor;
+use App\Models\Order;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class VendorCreatedEvent
+class OrderCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(private readonly Vendor $vendor)
+    public function __construct(public readonly Order $order)
     {
         //
-    }
-
-    public function getVendor(): Vendor
-    {
-        return $this->vendor;
     }
 }
