@@ -7,7 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -26,8 +27,8 @@ return new class extends Migration {
             $table->text('message')->nullable();
             $table->foreignIdFor(Country::class, 'country_from_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->foreignIdFor(Country::class, 'country_to_id')->nullable()->constrained('countries')->nullOnDelete();
-            $table->string('address_from');
-            $table->string('address_to');
+            $table->text('address_from');
+            $table->text('address_to');
             $table->date('pickup_at');
             $table->date('delivery_at');
             $table->unsignedTinyInteger('pickup_location_type');

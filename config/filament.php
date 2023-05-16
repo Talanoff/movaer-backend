@@ -1,13 +1,12 @@
 <?php
 
-use App\Filament\Resources\OrderResource\Widgets\StatsOverview;
+use App\Filament\Widgets\StatsOverview;
 use Filament\AvatarProviders\UiAvatarsProvider;
 use Filament\Http\Livewire\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
 use Filament\Pages;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;

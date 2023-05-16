@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\OrderResource\Widgets;
+namespace App\Filament\Widgets;
 
 use App\Models\Order;
 use App\Models\User;

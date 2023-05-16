@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\Enums\WishCategoryEnum;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Spatie\Translatable\HasTranslations;
 
 /**
@@ -12,19 +15,19 @@ use Spatie\Translatable\HasTranslations;
  * @property int $id
  * @property array $name
  * @property WishCategoryEnum $category
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Wish newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Wish newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Wish query()
- * @method static \Illuminate\Database\Eloquent\Builder|Wish whereCategory($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Wish whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Wish whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Wish whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Wish whereUpdatedAt($value)
+ * @method static Builder|Wish newModelQuery()
+ * @method static Builder|Wish newQuery()
+ * @method static Builder|Wish query()
+ * @method static Builder|Wish whereCategory($value)
+ * @method static Builder|Wish whereCreatedAt($value)
+ * @method static Builder|Wish whereId($value)
+ * @method static Builder|Wish whereName($value)
+ * @method static Builder|Wish whereUpdatedAt($value)
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Wish extends Model
 {
@@ -42,4 +45,16 @@ class Wish extends Model
     protected $casts = [
         'category' => WishCategoryEnum::class,
     ];
+
+    /* Scopes */
+
+    public function scopeCommon(Builder $builder): void
+    {
+        $builder->where('category', WishCategoryEnum::Common);
+    }
+
+    public function scopeAdditional(Builder $builder): void
+    {
+        $builder->where('category', WishCategoryEnum::Additional);
+    }
 }

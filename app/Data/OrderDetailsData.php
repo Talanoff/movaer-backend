@@ -2,9 +2,9 @@
 
 namespace App\Data;
 
-use App\Models\Wish;
 use Spatie\LaravelData\Attributes\MapOutputName;
-use Spatie\LaravelData\{Data, Optional};
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class OrderDetailsData extends Data
 {
@@ -14,21 +14,12 @@ class OrderDetailsData extends Data
     public array|Optional $contact;
 
     public function __construct(
-        array   $wishes,
-        array   $additionalWishes,
+        ?array $wishes,
+        ?array $additionalWishes,
         ?string $additionalWishesNotes
-    )
-    {
-        if (count($wishes)) {
-            $this->data['common']['names'] = Wish::findMany($wishes)->map->name;
-        }
-
-        if (count($additionalWishes)) {
-            $this->data['additional']['names'] = Wish::findMany($additionalWishes)->map->name;
-        }
-
-        if ($additionalWishesNotes) {
-            $this->data['additional']['notes'] = $additionalWishesNotes;
-        }
+    ) {
+        $this->data['common']['items'] = $wishes ?? [];
+        $this->data['additional']['items'] = $additionalWishes ?? [];
+        $this->data['additional']['notes'] = $additionalWishesNotes;
     }
 }

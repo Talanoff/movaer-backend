@@ -3,9 +3,9 @@
 namespace App\Data;
 
 use App\Enums\DeliveryCategoryEnum;
-use App\Models\Wish;
-use Spatie\LaravelData\{Data, Optional};
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class OrderData extends Data
 {
@@ -45,8 +45,7 @@ class OrderData extends Data
 
     public function __construct(
         string $category,
-    )
-    {
+    ) {
         $this->categoryName = DeliveryCategoryEnum::fromRequest($category);
     }
 }

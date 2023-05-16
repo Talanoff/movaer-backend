@@ -21,8 +21,7 @@ class VendorService
 
     public function __construct(
         private readonly UserService $userService
-    )
-    {
+    ) {
         //
     }
 
@@ -63,7 +62,7 @@ class VendorService
         foreach ($vehicles as $list) {
             foreach ($list as $vehicle) {
                 $items[$vehicle['key']] = [
-                    'quantity' => (int)$vehicle['value'],
+                    'quantity' => (int) $vehicle['value'],
                 ];
             }
         }

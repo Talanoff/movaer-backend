@@ -116,7 +116,7 @@ class Order extends Model implements HasMedia
         'delivery_location_type' => DeliveryLocationTypeEnum::class,
         'pickup_at' => 'date',
         'delivery_at' => 'date',
-        'details' => 'object',
+        'details' => 'array',
     ];
 
     public function getNanoIdOptions(): NanoIdOptions

@@ -31,6 +31,9 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
@@ -49,8 +52,6 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID'),
-                Tables\Columns\TextColumn::make('nano_id')
-                    ->label('Hash'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email')
                     ->icon('heroicon-s-mail'),

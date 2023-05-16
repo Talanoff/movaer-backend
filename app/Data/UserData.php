@@ -4,7 +4,8 @@ namespace App\Data;
 
 use App\Enums\UserRoleEnum;
 use Spatie\LaravelData\Attributes\MapOutputName;
-use Spatie\LaravelData\{Data, Optional};
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Optional;
 
 class UserData extends Data
 {
@@ -28,8 +29,7 @@ class UserData extends Data
 
         #[MapOutputName('phone')]
         public string|Optional $phone,
-    )
-    {
+    ) {
         //
     }
 }
