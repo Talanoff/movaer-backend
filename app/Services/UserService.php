@@ -6,7 +6,7 @@ use App\Data\UserData;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class UserService
+final class UserService
 {
     public function register(UserData $attributes): Model|User
     {

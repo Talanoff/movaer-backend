@@ -37,6 +37,7 @@ class CustomerBookingRequest extends FormRequest
             'additionalWishes' => ['nullable', 'array'],
             'additionalWishesNotes' => ['nullable', 'string'],
             'additionalWishesAttachment' => ['nullable', 'array'],
+            'additionalWishesAttachment.*' => ['required', 'string'],
 
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
             'agreeToTerms' => ['required', 'boolean'],

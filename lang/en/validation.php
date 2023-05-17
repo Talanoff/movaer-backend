@@ -163,8 +163,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'personalEmail' => [
+            'unique' => 'User with same email already been taken.',
         ],
     ],
 
