@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Mail\Order;
+namespace App\Mail\Customer;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderCreated extends Mailable implements ShouldQueue
+class OrderCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -22,14 +21,14 @@ class OrderCreated extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: trans('mail.order.created.subject'),
+            subject: trans('mail.customer.order.created.subject'),
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.order-created',
+            markdown: 'mail.customer.order-created',
         );
     }
 

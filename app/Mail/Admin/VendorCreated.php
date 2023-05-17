@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Vendor;
+namespace App\Mail\Admin;
 
 use App\Models\Vendor;
 use Illuminate\Bus\Queueable;
@@ -29,7 +29,7 @@ class VendorCreated extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.vendor-created',
+            markdown: 'mail.admin.vendor-created',
         );
     }
 }

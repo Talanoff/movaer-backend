@@ -14,11 +14,27 @@ return [
         ]
     ],
 
-    'order' => [
-        'created' => [
-            'subject' => 'New order received',
-            'message' => 'Incoming message.',
-            'button' => 'Review order details'
+    'admin' => [
+        'order' => [
+            'created' => [
+                'subject' => 'New order received',
+                'message' => 'Incoming message.',
+                'button' => 'Review order details'
+            ]
+        ]
+    ],
+
+    'customer' => [
+        'order' => [
+            'created' => [
+                'subject' => 'Your order have been placed',
+                'details' => 'Order details:',
+                'thank' => 'Thank you for choosing our service.',
+                'table' => [
+                    'from' => 'from',
+                    'to' => 'to'
+                ]
+            ]
         ]
     ]
 ];

@@ -1,6 +1,6 @@
 <x-mail::message>
-{{ trans('mail.order.created.message') }}
+{{ trans('mail.admin.order.created.message') }}
 <x-mail::button :url="route('filament.resources.orders.edit', $order)">
-{{ trans('mail.order.created.button') }}
+{{ trans('mail.admin.order.created.button') }}
 </x-mail::button>
 </x-mail::message>

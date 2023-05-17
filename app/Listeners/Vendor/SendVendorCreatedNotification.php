@@ -3,7 +3,7 @@
 namespace App\Listeners\Vendor;
 
 use App\Enums\UserRoleEnum;
-use App\Mail\Vendor\VendorCreated;
+use App\Mail\Admin\VendorCreated;
 use App\Models\User;
 use Mail;
 
