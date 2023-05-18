@@ -14,6 +14,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 
 class OrderResource extends Resource
@@ -73,7 +75,7 @@ class OrderResource extends Resource
                             ->label(trans('forms.fields.quantity'))
                             ->required(),
                         Forms\Components\TextInput::make('goods_weight')
-                            ->label(trans('forms.fields.weight').' (kg)')
+                            ->label(trans('forms.fields.weight') . ' (kg)')
                             ->required(),
                         Forms\Components\TextInput::make('goods_type')
                             ->label(trans('forms.fields.goods_type'))
@@ -151,11 +153,11 @@ class OrderResource extends Resource
                     ->alignCenter()
                     ->boolean()
                     ->options([
-                        'heroicon-o-check-circle' => fn ($state): bool => $state !== null,
+                        'heroicon-o-check-circle' => fn($state): bool => $state !== null,
                     ]),
                 Tables\Columns\TextColumn::make('id')
                     ->label(trans('forms.fields.order_no'))
-                    ->formatStateUsing(fn (int $state) => "#$state"),
+                    ->formatStateUsing(fn(int $state) => "#$state"),
                 Tables\Columns\SelectColumn::make('vendor_id')
                     ->label(trans('forms.fields.vendor'))
                     ->options(Vendor::pluck('name', 'id')),
@@ -170,19 +172,19 @@ class OrderResource extends Resource
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_weight')
                     ->label(trans('forms.fields.weight'))
-                    ->formatStateUsing(fn ($state): string => "$state kg")
+                    ->formatStateUsing(fn($state): string => "$state kg")
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_type')
                     ->label(trans('forms.fields.goods_type')),
                 Tables\Columns\TextColumn::make('address_from')
                     ->label(trans('forms.fields.pickup_details'))
-                    ->description(fn (Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
-                    ->description(fn (Order $record) => $record->pickup_location_type->getName())
+                    ->description(fn(Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
+                    ->description(fn(Order $record) => $record->pickup_location_type->getName())
                     ->wrap(),
                 Tables\Columns\TextColumn::make('address_to')
                     ->label(trans('forms.fields.delivery_details'))
-                    ->description(fn (Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
-                    ->description(fn (Order $record) => $record->delivery_location_type->getName())
+                    ->description(fn(Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
+                    ->description(fn(Order $record) => $record->delivery_location_type->getName())
                     ->wrap(),
                 Tables\Columns\IconColumn::make('user_id')
                     ->label(trans('forms.fields.registered'))
@@ -191,7 +193,11 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options(trans('forms.orders.statuses')),
+                TernaryFilter::make('read_at')
+                    ->label(trans('forms.fields.checked'))
+                    ->nullable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
