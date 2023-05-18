@@ -5,13 +5,13 @@ return [
         'created' => [
             'subject' => 'New vendor registered',
             'message' => 'You have new vendor registered.',
-            'button' => 'View profile'
+            'button' => 'View profile',
         ],
 
         'invitation' => [
             'subject' => 'Welcome on ":service"',
             'message' => 'You have successfully registered on ":service".',
-        ]
+        ],
     ],
 
     'admin' => [
@@ -19,9 +19,9 @@ return [
             'created' => [
                 'subject' => 'New order received',
                 'message' => 'Incoming message.',
-                'button' => 'Review order details'
-            ]
-        ]
+                'button' => 'Review order details',
+            ],
+        ],
     ],
 
     'customer' => [
@@ -32,9 +32,9 @@ return [
                 'thank' => 'Thank you for choosing our service.',
                 'table' => [
                     'from' => 'from',
-                    'to' => 'to'
-                ]
-            ]
-        ]
-    ]
+                    'to' => 'to',
+                ],
+            ],
+        ],
+    ],
 ];

@@ -14,11 +14,10 @@ class OrderDetailsData extends Data
     public array|Optional $contact;
 
     public function __construct(
-        ?array  $wishes,
-        ?array  $additionalWishes,
+        ?array $wishes,
+        ?array $additionalWishes,
         ?string $additionalWishesNotes
-    )
-    {
+    ) {
         $this->data['common']['items'] = $wishes ?? [];
         $this->data['additional']['items'] = $additionalWishes ?? [];
         $this->data['additional']['notes'] = $additionalWishesNotes;

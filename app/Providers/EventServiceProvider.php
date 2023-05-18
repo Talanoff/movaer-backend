@@ -26,12 +26,12 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         OrderCreated::class => [
-            SendOrderCreatedNotification::class
+            SendOrderCreatedNotification::class,
         ],
 
         VendorCreated::class => [
             SendVendorCreatedNotification::class,
-            SendVendorInvitationEmail::class
+            SendVendorInvitationEmail::class,
         ],
     ];
 

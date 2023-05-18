@@ -16,4 +16,12 @@ class EditOrder extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    public function beforeFill(): void
+    {
+        if ($this->record->read_at === null) {
+            $this->record->read_at = now();
+            $this->record->saveQuietly();
+        }
+    }
 }

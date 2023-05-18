@@ -39,6 +39,9 @@ return [
         'common_wishes' => 'Common wishes',
         'additional_wishes' => 'Additional wishes',
         'additional_wishes_notes' => 'Notes',
+        'order_no' => 'Order №',
+        'attachments' => 'Attachments',
+        'checked' => 'Checked',
     ],
 
     'locales' => [

@@ -9,16 +9,20 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Wish;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    protected static ?string $navigationGroup = 'Management';
 
     public static function form(Form $form): Form
     {
@@ -114,24 +118,27 @@ class OrderResource extends Resource
                     ]),
                 Forms\Components\Card::make()
                     ->columns(2)
-                    ->schema(function ($state, $set) {
-                        //                        $set('details.wishes.common.items', $state->details->wishes->common->items);
-
-                        return [
-                            Forms\Components\Select::make('details.wishes.common.items')
-                                ->label(trans('forms.fields.common_wishes'))
-                                ->multiple()
-                                ->options(Wish::common()->pluck('name', 'id')),
-                            Forms\Components\Select::make('details.wishes.additional.items')
-                                ->label(trans('forms.fields.additional_wishes'))
-                                ->multiple()
-                                ->options(Wish::additional()->pluck('name', 'id')),
-                            Forms\Components\Textarea::make('details.wishes.additional.notes')
-                                ->label(trans('forms.fields.additional_wishes_notes'))
-                                ->rows(3)
-                                ->columnSpan(2),
-                        ];
-                    }),
+                    ->schema([
+                        Forms\Components\Select::make('details.wishes.common.items')
+                            ->label(trans('forms.fields.common_wishes'))
+                            ->multiple()
+                            ->options(Wish::common()->pluck('name', 'id')),
+                        Forms\Components\Select::make('details.wishes.additional.items')
+                            ->label(trans('forms.fields.additional_wishes'))
+                            ->multiple()
+                            ->options(Wish::additional()->pluck('name', 'id')),
+                        Forms\Components\Textarea::make('details.wishes.additional.notes')
+                            ->label(trans('forms.fields.additional_wishes_notes'))
+                            ->rows(3)
+                            ->columnSpan(2),
+                    ]),
+                Forms\Components\Card::make()
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make(trans('forms.fields.attachments'))
+                            ->collection('attachments')
+                            ->multiple()
+                            ->enableReordering(),
+                    ]),
             ]);
     }
 
@@ -139,6 +146,16 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\IconColumn::make('read_at')
+                    ->label(trans('forms.fields.checked'))
+                    ->alignCenter()
+                    ->boolean()
+                    ->options([
+                        'heroicon-o-check-circle' => fn ($state): bool => $state !== null,
+                    ]),
+                Tables\Columns\TextColumn::make('id')
+                    ->label(trans('forms.fields.order_no'))
+                    ->formatStateUsing(fn (int $state) => "#$state"),
                 Tables\Columns\SelectColumn::make('vendor_id')
                     ->label(trans('forms.fields.vendor'))
                     ->options(Vendor::pluck('name', 'id')),
@@ -178,6 +195,7 @@ class OrderResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -198,5 +216,15 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->latest();
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::unread()->count();
     }
 }

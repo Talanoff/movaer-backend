@@ -15,9 +15,8 @@ class QuestionnaireController extends Controller
 {
     public function order(
         CustomerBookingRequest $request,
-        OrderService           $orderService
-    ): JsonResponse
-    {
+        OrderService $orderService
+    ): JsonResponse {
         $order = $orderService->store($request->collect());
 
         event(new OrderCreated($order));
@@ -27,9 +26,8 @@ class QuestionnaireController extends Controller
 
     public function vendor(
         VendorJoinRequest $request,
-        VendorService     $vendorService,
-    ): JsonResponse
-    {
+        VendorService $vendorService,
+    ): JsonResponse {
         $vendor = $vendorService->store($request->collect());
 
         event(new VendorCreated($vendor));

@@ -16,7 +16,7 @@ class LocationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-location-marker';
 
-    protected static ?string $navigationGroup = 'locations';
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
     {

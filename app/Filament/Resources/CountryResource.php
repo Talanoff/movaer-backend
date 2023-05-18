@@ -17,7 +17,7 @@ class CountryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-globe';
 
-    protected static ?string $navigationGroup = 'locations';
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
     {

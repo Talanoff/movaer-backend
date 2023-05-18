@@ -107,6 +107,7 @@ class Order extends Model implements HasMedia
         'details',
         'user_id',
         'vendor_id',
+        'read_at',
     ];
 
     protected $casts = [
@@ -116,6 +117,7 @@ class Order extends Model implements HasMedia
         'delivery_location_type' => DeliveryLocationTypeEnum::class,
         'pickup_at' => 'date',
         'delivery_at' => 'date',
+        'read_at' => 'datetime',
         'details' => 'array',
     ];
 
@@ -144,6 +146,13 @@ class Order extends Model implements HasMedia
     public function feedback(): HasOne
     {
         return $this->hasOne(Feedback::class);
+    }
+
+    /* Scopes */
+
+    public function scopeUnread(Builder $builder)
+    {
+        return $builder->whereNull('read_at');
     }
 
     /* Media */

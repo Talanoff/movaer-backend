@@ -49,7 +49,7 @@ final class OrderService
                     $extension = explode('/', mime_content_type($attachment))[1];
 
                     $order->addMediaFromBase64($attachment)
-                        ->usingFileName(md5(time()) . ($extension ? ".$extension" : '.png'))
+                        ->usingFileName(md5(time()).($extension ? ".$extension" : '.png'))
                         ->toMediaCollection('attachments');
                 }
             }

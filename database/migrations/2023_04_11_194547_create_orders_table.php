@@ -34,6 +34,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('pickup_location_type');
             $table->unsignedTinyInteger('delivery_location_type');
             $table->json('details');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
