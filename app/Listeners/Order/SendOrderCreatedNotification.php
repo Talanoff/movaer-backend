@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Mail;
+use Throwable;
 
 class SendOrderCreatedNotification implements ShouldQueue
 {
@@ -17,9 +18,13 @@ class SendOrderCreatedNotification implements ShouldQueue
 
     public function handle(OrderCreatedEvent $event): void
     {
-        $admins = User::where('role', UserRoleEnum::Administrator)->pluck('email');
+        try {
+            $admins = User::where('role', UserRoleEnum::Administrator)->pluck('email');
 
-        Mail::to($admins)->send(new AdminOrderCreated($event->order));
-        Mail::to($event->order->details['customer']['email'])->send(new ClientOrderCreated($event->order));
+            Mail::to($admins)->send(new AdminOrderCreated($event->order));
+            Mail::to($event->order->details['contact']['email'])->send(new ClientOrderCreated($event->order));
+        } catch (Throwable $exception) {
+            // TODO notify about notification error
+        }
     }
 }

@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Api\ConfigController;
 use App\Http\Controllers\Api\PageController;
-use App\Http\Controllers\QuestionnaireController;
+use App\Http\Controllers\Api\QuestionnaireController;
+use App\Http\Controllers\Api\UserController;
+
+Route::get('me', UserController::class)->middleware(['auth:sanctum']);
 
 Route::get('services', [ConfigController::class, 'services']);
 Route::get('vehicles', [ConfigController::class, 'vehicles']);

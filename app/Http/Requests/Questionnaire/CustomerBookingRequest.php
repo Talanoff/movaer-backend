@@ -41,10 +41,10 @@ class CustomerBookingRequest extends FormRequest
 
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
             'agreeToTerms' => ['required', 'boolean'],
-            'registerCheckbox' => ['boolean'],
+            'registrationRequired' => ['boolean'],
         ];
 
-        if ($this->boolean('registerCheckbox')) {
+        if ($this->boolean('registrationRequired')) {
             $rules = array_merge($rules, [
                 'name' => ['required', 'string', 'max:191'],
                 'email' => ['required', 'email', 'unique:users,email'],

@@ -19,6 +19,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -77,7 +78,7 @@ use Talanov\Nanoid\NanoIdOptions;
  */
 class User extends Authenticatable implements HasMedia, FilamentUser
 {
-    use HasFactory, HasNanoId, Notifiable, InteractsWithMedia;
+    use HasApiTokens, HasFactory, HasNanoId, Notifiable, InteractsWithMedia;
 
     protected $fillable = [
         'uid',

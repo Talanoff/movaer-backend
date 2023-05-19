@@ -110,7 +110,7 @@ class Vendor extends Model
             ->using(UserVendor::class);
     }
 
-    public function owner(): BelongsToMany
+    public function owners(): BelongsToMany
     {
         return $this->users()->wherePivot('role', UserVendorRoleEnum::Owner);
     }

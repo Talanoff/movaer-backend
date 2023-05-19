@@ -29,7 +29,7 @@ final class OrderService
 
         $order = new Order($orderAttributes->toArray());
 
-        if ($data->get('registerCheckbox')) {
+        if ($data->get('registrationRequired')) {
             tap($user)->save();
             $order->user_id = $user->getKey();
         }

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VendorInvitation extends Mailable
+class Invitation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +28,7 @@ class VendorInvitation extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.vendor-invitation',
+            markdown: 'mail.vendor.invitation',
         );
     }
 

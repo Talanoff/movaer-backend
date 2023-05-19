@@ -70,14 +70,22 @@ final class VendorService
         $this->vendor->vehicles()->sync($items);
     }
 
-    public function store(Collection $data): Model|Vendor
+    public function store(Collection $data): void
     {
         $this->user = $this->userService->register(UserData::from($data));
         $this->vendor = $this->register(VendorData::from($data));
 
         $this->assignVehicles($data->get('vehicles', []));
         $this->assignLocations(VendorLocationData::collection($data->get('locations')));
+    }
 
+    public function getVendor(): Vendor
+    {
         return $this->vendor;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }
