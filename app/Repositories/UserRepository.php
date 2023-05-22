@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Data\UserData;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-final class UserService
+final class UserRepository
 {
     public function register(UserData $attributes): Model|User
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Data\OrderData;
 use App\Data\OrderDetailsData;
@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Log;
 use Throwable;
 
-final class OrderService
+final class OrderRepository
 {
     public function store(Collection $data): Model|Order
     {
@@ -49,7 +49,7 @@ final class OrderService
                     $extension = explode('/', mime_content_type($attachment))[1];
 
                     $order->addMediaFromBase64($attachment)
-                        ->usingFileName(md5(time()).($extension ? ".$extension" : '.png'))
+                        ->usingFileName(md5(time()) . ($extension ? ".$extension" : '.png'))
                         ->toMediaCollection('attachments');
                 }
             }

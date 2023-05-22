@@ -7,9 +7,9 @@ use App\Events\Vendor\VendorCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Questionnaire\CustomerBookingRequest;
 use App\Http\Requests\Questionnaire\VendorJoinRequest;
+use App\Repositories\OrderRepository;
+use App\Repositories\VendorRepository;
 use App\Services\AuthService;
-use App\Services\OrderService;
-use App\Services\VendorService;
 use Auth;
 use Illuminate\Http\JsonResponse;
 use Response;
@@ -18,10 +18,11 @@ class QuestionnaireController extends Controller
 {
     public function order(
         CustomerBookingRequest $request,
-        OrderService $orderService,
-        AuthService $authService
-    ): JsonResponse {
-        $order = $orderService->store($request->collect());
+        OrderRepository        $orderRepository,
+        AuthService            $authService
+    ): JsonResponse
+    {
+        $order = $orderRepository->store($request->collect());
 
         event(new OrderCreated($order));
 
@@ -36,15 +37,16 @@ class QuestionnaireController extends Controller
 
     public function vendor(
         VendorJoinRequest $request,
-        VendorService $vendorService,
-        AuthService $authService
-    ): JsonResponse {
-        $vendorService->store($request->collect());
+        VendorRepository  $vendorRepository,
+        AuthService       $authService
+    ): JsonResponse
+    {
+        $vendorRepository->store($request->collect());
 
-        event(new VendorCreated($vendorService->getVendor()));
+        event(new VendorCreated($vendorRepository->getVendor()));
 
-        Auth::login($vendorService->getUser());
+        Auth::login($vendorRepository->getUser());
 
-        return $authService->login($vendorService->getUser(), $request->userAgent());
+        return $authService->login($vendorRepository->getUser(), $request->userAgent());
     }
 }

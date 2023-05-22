@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Data\UserData;
 use App\Data\VendorData;
@@ -13,15 +13,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Contracts\DataCollectable;
 
-final class VendorService
+final class VendorRepository
 {
     private User $user;
 
     private Vendor $vendor;
 
     public function __construct(
-        private readonly UserService $userService
-    ) {
+        private readonly UserRepository $userRepository
+    )
+    {
         //
     }
 
@@ -62,7 +63,7 @@ final class VendorService
         foreach ($vehicles as $list) {
             foreach ($list as $vehicle) {
                 $items[$vehicle['key']] = [
-                    'quantity' => (int) $vehicle['value'],
+                    'quantity' => (int)$vehicle['value'],
                 ];
             }
         }
@@ -72,7 +73,7 @@ final class VendorService
 
     public function store(Collection $data): void
     {
-        $this->user = $this->userService->register(UserData::from($data));
+        $this->user = $this->userRepository->register(UserData::from($data));
         $this->vendor = $this->register(VendorData::from($data));
 
         $this->assignVehicles($data->get('vehicles', []));
