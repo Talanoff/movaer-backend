@@ -16,7 +16,7 @@ class OrderData extends Data
     public ?int $weight;
 
     #[MapOutputName('goods_type')]
-    public ?int $goods;
+    public ?string $goods;
 
     public ?string $message;
 
@@ -45,7 +45,8 @@ class OrderData extends Data
 
     public function __construct(
         string $category,
-    ) {
+    )
+    {
         $this->categoryName = DeliveryCategoryEnum::fromRequest($category);
     }
 }

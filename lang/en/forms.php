@@ -42,6 +42,7 @@ return [
         'order_no' => 'Order №',
         'attachments' => 'Attachments',
         'checked' => 'Checked',
+        'country' => 'Country'
     ],
 
     'locales' => [

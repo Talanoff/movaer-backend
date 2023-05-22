@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VendorResource\Pages;
 use App\Filament\Resources\VendorResource\RelationManagers;
+use App\Models\Country;
 use App\Models\Vendor;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -23,19 +24,23 @@ class VendorResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->columnSpan(2)
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Grid::make(5)
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->columnSpan(2)
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phone')
+                            ->tel()
+                            ->required()
+                            ->maxLength(255),
+                    ]),
+                Forms\Components\Card::make()
+                    ->columns(5)
                     ->schema([
                         Forms\Components\TextInput::make('iban')
                             ->columnSpan(3)
@@ -46,13 +51,16 @@ class VendorResource extends Resource
                         Forms\Components\TextInput::make('commerce_no')
                             ->maxLength(255),
                     ]),
-                Forms\Components\Textarea::make('address')
-                    ->columnSpan(2)
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('post_code')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Textarea::make('address')
+                            ->columnSpan(2)
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('post_code')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
                 Forms\Components\Textarea::make('about')
                     ->columnSpan(2)
                     ->maxLength(65535),

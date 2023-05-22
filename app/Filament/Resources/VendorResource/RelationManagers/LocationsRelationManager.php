@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\VendorResource\RelationManagers;
 
+use App\Models\Country;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -18,6 +19,10 @@ class LocationsRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('country_id')
+                    ->label(trans('forms.fields.country'))
+                    ->options(Country::pluck('name', 'id'))
+                    ->searchable(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -30,6 +35,7 @@ class LocationsRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('country.name'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\IconColumn::make('is_default')
                     ->alignCenter()
@@ -43,7 +49,7 @@ class LocationsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
-                    ->form(fn (Tables\Actions\AttachAction $action): array => [
+                    ->form(fn(Tables\Actions\AttachAction $action): array => [
                         $action->getRecordSelect(),
                         Forms\Components\TextInput::make('quantity')
                             ->label(__('forms.fields.quantity'))
@@ -53,6 +59,10 @@ class LocationsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->form([
+                        Forms\Components\Select::make('country_id')
+                            ->label(trans('forms.fields.country'))
+                            ->options(Country::pluck('name', 'id'))
+                            ->searchable(),
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255),
