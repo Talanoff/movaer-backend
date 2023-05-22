@@ -29,6 +29,7 @@ return [
             'created' => [
                 'subject' => 'Your order have been placed',
                 'details' => 'Order details:',
+                'contact' => 'Contact details:',
                 'thank' => 'Thank you for choosing our service.',
                 'table' => [
                     'from' => 'from',
