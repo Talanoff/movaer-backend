@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Data\UserData;
 use App\Data\VendorData;
 use App\Data\VendorLocationData;
 use App\Enums\UserVendorRoleEnum;
@@ -21,8 +20,7 @@ final class VendorRepository
 
     public function __construct(
         private readonly UserRepository $userRepository
-    )
-    {
+    ) {
         //
     }
 
@@ -63,7 +61,7 @@ final class VendorRepository
         foreach ($vehicles as $list) {
             foreach ($list as $vehicle) {
                 $items[$vehicle['key']] = [
-                    'quantity' => (int)$vehicle['value'],
+                    'quantity' => (int) $vehicle['value'],
                 ];
             }
         }
@@ -73,7 +71,9 @@ final class VendorRepository
 
     public function store(Collection $data): void
     {
-        $this->user = $this->userRepository->register(UserData::from($data));
+        $this->userRepository->fill($data)->store();
+
+        $this->user = $this->userRepository->getUser();
         $this->vendor = $this->register(VendorData::from($data));
 
         $this->assignVehicles($data->get('vehicles', []));

@@ -45,8 +45,7 @@ class OrderData extends Data
 
     public function __construct(
         string $category,
-    )
-    {
+    ) {
         $this->categoryName = DeliveryCategoryEnum::fromRequest($category);
     }
 }

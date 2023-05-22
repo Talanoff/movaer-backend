@@ -4,12 +4,28 @@ namespace App\Repositories;
 
 use App\Data\UserData;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 final class UserRepository
 {
-    public function register(UserData $attributes): Model|User
+    private User $user;
+
+    public function fill(Collection $data): UserRepository
     {
-        return User::create($attributes->toArray());
+        $this->user = new User(UserData::from($data)->toArray());
+
+        return $this;
+    }
+
+    public function store(): UserRepository
+    {
+        $this->user = tap($this->user)->save();
+
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }

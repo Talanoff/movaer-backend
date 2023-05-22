@@ -4,19 +4,25 @@ namespace App\Repositories;
 
 use App\Data\OrderData;
 use App\Data\OrderDetailsData;
-use App\Data\UserData;
 use App\Models\Order;
-use App\Models\User;
+use App\Services\MediaService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Log;
-use Throwable;
 
 final class OrderRepository
 {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly MediaService $mediaService
+    ) {
+        //
+    }
+
     public function store(Collection $data): Model|Order
     {
-        $user = new User(UserData::from($data)->toArray());
+        $this->userRepository->fill($data);
+
+        $user = $this->userRepository->getUser();
 
         $orderAttributes = OrderData::from($data);
         $orderAttributes->details = OrderDetailsData::from(
@@ -30,31 +36,18 @@ final class OrderRepository
         $order = new Order($orderAttributes->toArray());
 
         if ($data->get('registrationRequired')) {
-            tap($user)->save();
-            $order->user_id = $user->getKey();
+            $this->userRepository->store();
+            $order->user_id = $this->userRepository->getUser()->getKey();
         }
 
         tap($order)->save();
 
-        $this->saveAttachments($data, $order);
+        $this->mediaService->fromBase64(
+            $order,
+            $data->get('additionalWishesAttachment', []),
+            'attachments'
+        );
 
         return $order;
-    }
-
-    private function saveAttachments(Collection $data, Order $order): void
-    {
-        try {
-            if (count($attachments = $data->get('additionalWishesAttachment', []))) {
-                foreach ($attachments as $attachment) {
-                    $extension = explode('/', mime_content_type($attachment))[1];
-
-                    $order->addMediaFromBase64($attachment)
-                        ->usingFileName(md5(time()) . ($extension ? ".$extension" : '.png'))
-                        ->toMediaCollection('attachments');
-                }
-            }
-        } catch (Throwable $exception) {
-            Log::error($exception->getMessage(), ['Order', 'Attachments']);
-        }
     }
 }
