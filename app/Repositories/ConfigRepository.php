@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Enums\DeliveryLocationTypeEnum;
+use App\Map\KeyValue;
 use App\Models\Country;
 use App\Models\Service;
 use App\Models\Vehicle;
@@ -15,10 +16,7 @@ class ConfigRepository
     {
         return Service::has('vehicles')
             ->get(['id', 'name'])
-            ->map(fn (Service $service) => [
-                'id' => $service->id,
-                'name' => $service->name,
-            ])
+            ->mapInto(KeyValue::class)
             ->toArray();
     }
 
@@ -28,22 +26,15 @@ class ConfigRepository
             ->when(count($services), fn (Builder $query) => $query->whereIn('service_id', $services))
             ->get(['name', 'service_id', 'id'])
             ->groupBy('service.id')
-            ->map->map(fn (Vehicle $vehicle) => [
-                'id' => $vehicle->id,
-                'name' => $vehicle->name,
-            ])
+            ->map->mapInto(KeyValue::class)
             ->toArray();
     }
 
     public function countries(): array
     {
         return Country::visible()
-            ->get(['id', 'name', 'alpha2'])
-            ->map(fn (Country $country) => [
-                'id' => $country->id,
-                'name' => $country->name,
-                'alpha2' => $country->alpha2,
-            ])
+            ->get(['id', 'name'])
+            ->mapInto(KeyValue::class)
             ->toArray();
     }
 
@@ -51,10 +42,7 @@ class ConfigRepository
     {
         return Wish::get(['id', 'name', 'category'])
             ->groupBy(fn ($category) => $category->category->value)
-            ->map->map(fn (Wish $wish) => [
-                'id' => $wish->id,
-                'name' => $wish->name,
-            ])
+            ->map->mapInto(KeyValue::class)
             ->toArray();
     }
 

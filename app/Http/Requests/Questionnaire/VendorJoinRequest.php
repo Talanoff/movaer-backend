@@ -31,6 +31,8 @@ class VendorJoinRequest extends FormRequest
             'phone' => ['nullable', 'string'],
             'locations' => ['nullable', 'array'],
             'vehicles' => ['array', 'required'],
+            'role' => ['required', new Enum(UserRoleEnum::class)],
+            'locale' => ['required', 'string', Rule::in(config('app.locales'))],
         ];
 
         if (! Auth::guard('sanctum')->check()) {
@@ -39,8 +41,6 @@ class VendorJoinRequest extends FormRequest
                 'personalPhone' => ['required', 'string'],
                 'personalEmail' => ['required', 'email', 'unique:users,email'],
                 'password' => ['required', Password::defaults()],
-                'role' => ['required', new Enum(UserRoleEnum::class)],
-                'locale' => ['required', 'string', Rule::in(config('app.locales'))],
                 'agreeToTerms' => ['required', 'boolean'],
             ]);
         }
