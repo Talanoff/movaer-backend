@@ -16,10 +16,12 @@ use Str;
  *
  * @property int $id
  * @property int $country_id
- * @property array $name
+ * @property string $name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Country $country
+ * @property-read \App\Models\Country $country
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Vendor> $vendors
+ * @property-read int|null $vendors_count
  *
  * @method static Builder|Location newModelQuery()
  * @method static Builder|Location newQuery()

@@ -18,6 +18,8 @@ use Spatie\Translatable\HasTranslations;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
+ * @method static Builder|Wish additional()
+ * @method static Builder|Wish common()
  * @method static Builder|Wish newModelQuery()
  * @method static Builder|Wish newQuery()
  * @method static Builder|Wish query()

@@ -62,7 +62,7 @@ class LocationsRelationManager extends RelationManager
                     ]),
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
-                    ->form(fn(Tables\Actions\AttachAction $action): array => [
+                    ->form(fn (Tables\Actions\AttachAction $action): array => [
                         $action->getRecordSelect(),
                         Forms\Components\Toggle::make('is_default')
                             ->label(__('forms.fields.is_default')),
