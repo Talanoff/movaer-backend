@@ -30,6 +30,7 @@ class VendorResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('email')
+                            ->unique('vendors', 'email')
                             ->email()
                             ->required()
                             ->maxLength(255),
@@ -46,7 +47,7 @@ class VendorResource extends Resource
                             ->required()
                             ->maxLength(33),
                         Forms\Components\TextInput::make('vat')
-                            ->numeric(),
+                            ->required(),
                         Forms\Components\TextInput::make('commerce_no')
                             ->maxLength(255),
                     ]),

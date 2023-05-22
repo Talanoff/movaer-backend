@@ -21,7 +21,7 @@ class LocationsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Select::make('country_id')
                     ->label(trans('forms.fields.country'))
-                    ->options(Country::pluck('name', 'id'))
+                    ->options(Country::visible()->pluck('name', 'id'))
                     ->searchable(),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -47,13 +47,25 @@ class LocationsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->form([
+                        Forms\Components\Select::make('country_id')
+                            ->preload()
+                            ->label(trans('forms.fields.country'))
+                            ->options(Country::visible()->pluck('name', 'id'))
+                            ->searchable(),
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Toggle::make('is_default')
+                            ->label(__('forms.fields.is_default')),
+                    ]),
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
-                    ->form(fn (Tables\Actions\AttachAction $action): array => [
+                    ->form(fn(Tables\Actions\AttachAction $action): array => [
                         $action->getRecordSelect(),
-                        Forms\Components\TextInput::make('quantity')
-                            ->label(__('forms.fields.quantity'))
-                            ->required(),
+                        Forms\Components\Toggle::make('is_default')
+                            ->label(__('forms.fields.is_default')),
                     ]),
             ])
             ->actions([
@@ -61,7 +73,7 @@ class LocationsRelationManager extends RelationManager
                     ->form([
                         Forms\Components\Select::make('country_id')
                             ->label(trans('forms.fields.country'))
-                            ->options(Country::pluck('name', 'id'))
+                            ->options(Country::visible()->pluck('name', 'id'))
                             ->searchable(),
                         Forms\Components\TextInput::make('name')
                             ->required()

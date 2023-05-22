@@ -4,13 +4,12 @@ namespace App\Repositories;
 
 use App\Data\UserData;
 use App\Models\User;
-use Illuminate\Support\Collection;
 
 final class UserRepository
 {
     private User $user;
 
-    public function fill(Collection $data): UserRepository
+    public function fill(array $data): UserRepository
     {
         $this->user = new User(UserData::from($data)->toArray());
 

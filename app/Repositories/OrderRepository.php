@@ -7,7 +7,7 @@ use App\Data\OrderDetailsData;
 use App\Models\Order;
 use App\Services\MediaService;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use Illuminate\Foundation\Http\FormRequest;
 
 final class OrderRepository
 {
@@ -18,33 +18,36 @@ final class OrderRepository
         //
     }
 
-    public function store(Collection $data): Model|Order
+    public function store(FormRequest $request): Model|Order
     {
-        $this->userRepository->fill($data);
+        if (! $user = $request->user('sanctum')) {
+            $this->userRepository->fill($request->validated());
+            $user = $this->userRepository->getUser();
+        }
 
-        $user = $this->userRepository->getUser();
-
-        $orderAttributes = OrderData::from($data);
+        $orderAttributes = OrderData::from($request->validated());
         $orderAttributes->details = OrderDetailsData::from(
-            $data->merge([
-                'contact' => $user->only([
+            $request->merge([
+                'contact' => (clone $user)->only([
                     'name', 'email', 'phone', 'locale',
                 ]),
-            ])
+            ])->validated()
         );
 
         $order = new Order($orderAttributes->toArray());
 
-        if ($data->get('registrationRequired')) {
+        if ($request->boolean('registrationRequired')) {
             $this->userRepository->store();
             $order->user_id = $this->userRepository->getUser()->getKey();
+        } elseif ($user) {
+            $order->user_id = $user->getKey();
         }
 
         tap($order)->save();
 
         $this->mediaService->fromBase64(
             $order,
-            $data->get('additionalWishesAttachment', []),
+            $request->get('additionalWishesAttachment', []),
             'attachments'
         );
 

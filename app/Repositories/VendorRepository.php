@@ -9,12 +9,12 @@ use App\Models\Location;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use Illuminate\Foundation\Http\FormRequest;
 use Spatie\LaravelData\Contracts\DataCollectable;
 
 final class VendorRepository
 {
-    private User $user;
+    private ?User $user = null;
 
     private Vendor $vendor;
 
@@ -69,15 +69,17 @@ final class VendorRepository
         $this->vendor->vehicles()->sync($items);
     }
 
-    public function store(Collection $data): void
+    public function store(FormRequest $request): void
     {
-        $this->userRepository->fill($data)->store();
+        if (! $this->user = $request->user('sanctum')) {
+            $this->userRepository->fill($request->validated())->store();
+            $this->user = $this->userRepository->getUser();
+        }
 
-        $this->user = $this->userRepository->getUser();
-        $this->vendor = $this->register(VendorData::from($data));
+        $this->vendor = $this->register(VendorData::from($request->validated()));
 
-        $this->assignVehicles($data->get('vehicles', []));
-        $this->assignLocations(VendorLocationData::collection($data->get('locations')));
+        $this->assignVehicles($request->get('vehicles', []));
+        $this->assignLocations(VendorLocationData::collection($request->get('locations')));
     }
 
     public function getVendor(): Vendor

@@ -21,7 +21,7 @@ class QuestionnaireController extends Controller
         OrderRepository $orderRepository,
         AuthService $authService
     ): JsonResponse {
-        $order = $orderRepository->store($request->collect());
+        $order = $orderRepository->store($request);
 
         event(new OrderCreated($order));
 
@@ -39,7 +39,7 @@ class QuestionnaireController extends Controller
         VendorRepository $vendorRepository,
         AuthService $authService
     ): JsonResponse {
-        $vendorRepository->store($request->collect());
+        $vendorRepository->store($request);
 
         event(new VendorCreated($vendorRepository->getVendor()));
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Questionnaire;
 
 use App\Enums\UserRoleEnum;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -17,7 +18,7 @@ class VendorJoinRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        $rules = [
             'companyName' => ['required', 'string', 'max:191'],
             'commerceNumber' => ['required', 'string', 'max:191'],
             'iban' => ['required', 'string', 'max:33'],
@@ -30,16 +31,21 @@ class VendorJoinRequest extends FormRequest
             'phone' => ['nullable', 'string'],
             'locations' => ['nullable', 'array'],
             'vehicles' => ['array', 'required'],
-
-            'name' => ['required', 'string'],
-            'personalPhone' => ['required', 'string'],
-            'personalEmail' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', Password::defaults()],
-            'role' => ['required', new Enum(UserRoleEnum::class)],
-            'locale' => ['required', 'string', Rule::in(config('app.locales'))],
-
-            'agreeToTerms' => ['required', 'boolean'],
         ];
+
+        if (! Auth::guard('sanctum')->check()) {
+            $rules = array_merge($rules, [
+                'name' => ['required', 'string'],
+                'personalPhone' => ['required', 'string'],
+                'personalEmail' => ['required', 'email', 'unique:users,email'],
+                'password' => ['required', Password::defaults()],
+                'role' => ['required', new Enum(UserRoleEnum::class)],
+                'locale' => ['required', 'string', Rule::in(config('app.locales'))],
+                'agreeToTerms' => ['required', 'boolean'],
+            ]);
+        }
+
+        return $rules;
     }
 
     protected function prepareForValidation(): void

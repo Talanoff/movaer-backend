@@ -65,11 +65,9 @@ class OrderResource extends Resource
                             ]),
                         Forms\Components\Select::make('status')
                             ->options(trans('forms.orders.statuses'))
-                            ->disablePlaceholderSelection()
                             ->required(),
                         Forms\Components\Select::make('category')
                             ->options(trans('forms.orders.categories'))
-                            ->disablePlaceholderSelection()
                             ->required(),
                         Forms\Components\TextInput::make('goods_number')
                             ->label(trans('forms.fields.quantity'))

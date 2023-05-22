@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Questionnaire;
 
 use App\Enums\UserRoleEnum;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -17,10 +18,6 @@ class CustomerBookingRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'string', 'max:191'],
-            'email' => ['required', 'email', 'max:191'],
-            'phone' => ['required', 'string', 'max:20'],
-
             'category' => ['required', 'in:one,many,pallets,various'],
             'pieces' => ['required', 'numeric'],
             'weight' => ['nullable', 'numeric'],
@@ -40,9 +37,17 @@ class CustomerBookingRequest extends FormRequest
             'additionalWishesAttachment.*' => ['nullable', 'string'],
 
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
-            'agreeToTerms' => ['required', 'boolean'],
-            'registrationRequired' => ['boolean'],
         ];
+
+        if (! Auth::guard('sanctum')->check()) {
+            $rules = array_merge($rules, [
+                'name' => ['required', 'string', 'max:191'],
+                'email' => ['required', 'email', 'max:191'],
+                'phone' => ['required', 'string', 'max:20'],
+                'agreeToTerms' => ['required', 'boolean'],
+                'registrationRequired' => ['boolean'],
+            ]);
+        }
 
         if ($this->boolean('registrationRequired')) {
             $rules = array_merge($rules, [

@@ -140,7 +140,8 @@ class Vendor extends Model
     public function locations(): BelongsToMany
     {
         return $this->belongsToMany(Location::class)
-            ->withPivot('is_default');
+            ->withPivot('is_default')
+            ->using(LocationVendor::class);
     }
 
     public function feedback(): HasManyThrough
@@ -153,8 +154,8 @@ class Vendor extends Model
     protected function phone(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value): string => "+$value",
-            set: static fn ($value) => preg_replace('/\D/', '', $value)
+            get: static fn($value): string => "+$value",
+            set: static fn($value) => preg_replace('/\D/', '', $value)
         );
     }
 }
