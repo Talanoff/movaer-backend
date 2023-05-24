@@ -20,18 +20,20 @@ final class OrderRepository
 
     public function store(FormRequest $request): Model|Order
     {
+        $attributes = $request->validated();
+
         if (! $user = $request->user('sanctum')) {
-            $this->userRepository->fill($request->validated());
+            $this->userRepository->fill($attributes);
             $user = $this->userRepository->getUser();
         }
 
-        $orderAttributes = OrderData::from($request->validated());
+        $orderAttributes = OrderData::from($attributes);
         $orderAttributes->details = OrderDetailsData::from(
-            $request->merge([
+            $attributes + [
                 'contact' => (clone $user)->only([
                     'name', 'email', 'phone', 'locale',
                 ]),
-            ])->validated()
+            ]
         );
 
         $order = new Order($orderAttributes->toArray());
