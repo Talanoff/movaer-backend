@@ -44,6 +44,7 @@ class ConfigController extends Controller
         return Response::json([
             'wishes' => $this->configRepository->wishes(),
             'locationTypes' => $this->configRepository->locationTypes(),
+            'goodsTypes' => $this->configRepository->variousGoods(),
         ]);
     }
 }

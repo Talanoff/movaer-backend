@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\DeliveryCategoryEnum;
 use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
+use App\Enums\VariousGoodsTypeEnum;
+use Database\Factories\OrderFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -49,15 +51,15 @@ use Talanov\Nanoid\NanoIdOptions;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property Carbon|null $read_at
- * @property-read Collection<int, \App\Models\ChatRoom> $chatRooms
+ * @property-read Collection<int, ChatRoom> $chatRooms
  * @property-read int|null $chat_rooms_count
- * @property-read \App\Models\Feedback|null $feedback
+ * @property-read Feedback|null $feedback
  * @property-read MediaCollection<int, Media> $media
  * @property-read int|null $media_count
- * @property-read \App\Models\User|null $user
- * @property-read \App\Models\Vendor|null $vendor
+ * @property-read User|null $user
+ * @property-read Vendor|null $vendor
  *
- * @method static \Database\Factories\OrderFactory factory($count = null, $state = [])
+ * @method static OrderFactory factory($count = null, $state = [])
  * @method static Builder|Order newModelQuery()
  * @method static Builder|Order newQuery()
  * @method static Builder|Order onlyTrashed()
@@ -117,6 +119,7 @@ class Order extends Model implements HasMedia
     protected $casts = [
         'status' => OrderStatusEnum::class,
         'category' => DeliveryCategoryEnum::class,
+        'goods_type' => VariousGoodsTypeEnum::class,
         'pickup_location_type' => DeliveryLocationTypeEnum::class,
         'delivery_location_type' => DeliveryLocationTypeEnum::class,
         'pickup_at' => 'date',

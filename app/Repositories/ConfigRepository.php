@@ -3,7 +3,8 @@
 namespace App\Repositories;
 
 use App\Enums\DeliveryLocationTypeEnum;
-use App\Map\KeyValue;
+use App\Enums\VariousGoodsTypeEnum;
+use App\Mappers\KeyValue;
 use App\Models\Country;
 use App\Models\Service;
 use App\Models\Vehicle;
@@ -49,5 +50,10 @@ class ConfigRepository
     public function locationTypes(): array
     {
         return DeliveryLocationTypeEnum::toResource();
+    }
+
+    public function variousGoods(): array
+    {
+        return VariousGoodsTypeEnum::toResource();
     }
 }

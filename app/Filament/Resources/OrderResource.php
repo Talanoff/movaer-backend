@@ -75,9 +75,9 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('goods_weight')
                             ->label(trans('forms.fields.weight').' (kg)')
                             ->required(),
-                        Forms\Components\TextInput::make('goods_type')
+                        Forms\Components\Select::make('goods_type')
                             ->label(trans('forms.fields.goods_type'))
-                            ->maxLength(255),
+                            ->options(trans('forms.various_goods')),
                         Forms\Components\Textarea::make('message')
                             ->rows(3)
                             ->columnSpan(2),
@@ -173,7 +173,8 @@ class OrderResource extends Resource
                     ->formatStateUsing(fn ($state): string => "$state kg")
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_type')
-                    ->label(trans('forms.fields.goods_type')),
+                    ->label(trans('forms.fields.goods_type'))
+                    ->enum(trans('forms.various_goods')),
                 Tables\Columns\TextColumn::make('address_from')
                     ->label(trans('forms.fields.pickup_details'))
                     ->description(fn (Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')

@@ -4,6 +4,7 @@ use App\Enums\DeliveryCategoryEnum;
 use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
 use App\Enums\UserRoleEnum;
+use App\Enums\VariousGoodsTypeEnum;
 use App\Enums\WishCategoryEnum;
 
 return [
@@ -56,9 +57,32 @@ return [
     ],
 
     'location_types' => [
-        DeliveryLocationTypeEnum::LivingPlace->value => 'Living place',
+        DeliveryLocationTypeEnum::ResidentialBuilding->value => 'Residential Building',
         DeliveryLocationTypeEnum::OfficeBuilding->value => 'Office building',
-        DeliveryLocationTypeEnum::StorageShed->value => 'Storage shed',
+        DeliveryLocationTypeEnum::ApartmentBuilding->value => 'Apartment Building',
+        DeliveryLocationTypeEnum::DistributionCenter->value => 'Distribution Center',
+        DeliveryLocationTypeEnum::CompanyShed->value => 'Company Shed',
+        DeliveryLocationTypeEnum::HealthcareFacility->value => 'Healthcare Facility',
+        DeliveryLocationTypeEnum::RecreationArea->value => 'Recreation Area',
+        DeliveryLocationTypeEnum::GuardedArea->value => 'Guarded Area',
+        DeliveryLocationTypeEnum::HarborArea->value => 'Harbor Area',
+        DeliveryLocationTypeEnum::Airport->value => 'Airport',
+        DeliveryLocationTypeEnum::SomethingDifferent->value => 'Something different',
+    ],
+
+    'various_goods' => [
+        VariousGoodsTypeEnum::Cars->value => 'Car(s)',
+        VariousGoodsTypeEnum::Furniture->value => 'Furniture',
+        VariousGoodsTypeEnum::SeaContainer->value => 'Sea Container',
+        VariousGoodsTypeEnum::RollContainer->value => 'Roll Container',
+        VariousGoodsTypeEnum::FlowerContainer->value => 'FH Flowercontainer',
+        VariousGoodsTypeEnum::DanishFlowerContainer->value => 'Danish Flowercontainer',
+        VariousGoodsTypeEnum::Bikes->value => 'Bike(s)',
+        VariousGoodsTypeEnum::Liquids->value => 'Liquid(s)',
+        VariousGoodsTypeEnum::ConstructionMaterials->value => 'Construction Materials',
+        VariousGoodsTypeEnum::Cattle->value => 'Cattle',
+        VariousGoodsTypeEnum::HangingMeat->value => 'Hanging Meat',
+        VariousGoodsTypeEnum::SomethingDifferent->value => 'Something different',
     ],
 
     'users' => [
@@ -77,7 +101,7 @@ return [
         ],
         'statuses' => [
             OrderStatusEnum::Created->value => 'New',
-            OrderStatusEnum::AwaitingForApprove->value => 'Awaiting for approve',
+            OrderStatusEnum::AwaitingForApprove->value => 'Awaiting for approval',
             OrderStatusEnum::Approved->value => 'Approved',
             OrderStatusEnum::Processing->value => 'Processing',
             OrderStatusEnum::Fulfilled->value => 'Fulfilled',
