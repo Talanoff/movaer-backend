@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Questionnaire;
 
 use App\Enums\UserRoleEnum;
+use App\Enums\VariousGoodsTypeEnum;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -29,7 +30,7 @@ class CustomerBookingRequest extends FormRequest
             'selectLocationFrom' => ['required', 'int'],
             'selectLocationTo' => ['required', 'int'],
             'message' => ['nullable', 'string'],
-            'goods' => ['nullable', 'string'],
+            'goods' => ['nullable', 'int', new Enum(VariousGoodsTypeEnum::class)],
 
             'wishes' => ['nullable', 'array'],
             'additionalWishes' => ['nullable', 'array'],

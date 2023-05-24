@@ -3,6 +3,7 @@
 namespace App\Data;
 
 use App\Enums\DeliveryCategoryEnum;
+use App\Enums\VariousGoodsTypeEnum;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Optional;
@@ -16,7 +17,7 @@ class OrderData extends Data
     public ?int $weight;
 
     #[MapOutputName('goods_type')]
-    public ?string $goods;
+    public ?int $goods;
 
     public ?string $message;
 
