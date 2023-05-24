@@ -21,7 +21,7 @@ enum VariousGoodsTypeEnum: int
     {
         return array_map(static fn ($it) => [
             'key' => $it->value,
-            'value' => trans('forms.location_types.'.$it->value),
+            'value' => trans('forms.various_goods.'.$it->value),
         ], self::cases());
     }
 }
