@@ -11,7 +11,7 @@ class OrderDetailsData extends Data
     #[MapOutputName('wishes')]
     public array $data;
 
-    public array|Optional $contact;
+    public array $contact;
 
     public function __construct(
         ?array $wishes,

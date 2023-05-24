@@ -29,11 +29,11 @@ final class OrderRepository
 
         $orderAttributes = OrderData::from($attributes);
         $orderAttributes->details = OrderDetailsData::from(
-            $attributes + [
+            array_merge($attributes, [
                 'contact' => (clone $user)->only([
                     'name', 'email', 'phone', 'locale',
                 ]),
-            ]
+            ])
         );
 
         $order = new Order($orderAttributes->toArray());
