@@ -19,6 +19,8 @@ class OrderData extends Data
     #[MapOutputName('goods_type')]
     public ?int $goods;
 
+    public ?string $bulk;
+
     public ?string $message;
 
     #[MapOutputName('address_from')]
@@ -33,6 +35,15 @@ class OrderData extends Data
     #[MapOutputName('delivery_at')]
     public string $dateTo;
 
+    #[MapOutputName('recurring_shipping')]
+    public bool $recurringShipping;
+
+    #[MapOutputName('recurring_shipping_type')]
+    public ?int $recurringShippingType;
+
+    #[MapOutputName('recurring_shipping_custom')]
+    public ?string $recurringShippingCustom;
+
     #[MapOutputName('pickup_location_type')]
     public int $selectLocationFrom;
 
@@ -46,7 +57,8 @@ class OrderData extends Data
 
     public function __construct(
         string $category,
-    ) {
+    )
+    {
         $this->categoryName = DeliveryCategoryEnum::fromRequest($category);
     }
 }

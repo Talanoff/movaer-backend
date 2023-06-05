@@ -15,13 +15,14 @@ enum VariousGoodsTypeEnum: int
     case ConstructionMaterials = 8;
     case Cattle = 9;
     case HangingMeat = 10;
-    case SomethingDifferent = 11;
+    case Bulk = 11;
+    case SomethingDifferent = 12;
 
     public static function toResource(): array
     {
-        return array_map(static fn ($it) => [
+        return array_map(static fn($it) => [
             'key' => $it->value,
-            'value' => trans('forms.various_goods.'.$it->value),
+            'value' => trans('forms.various_goods.' . $it->value),
         ], self::cases());
     }
 }

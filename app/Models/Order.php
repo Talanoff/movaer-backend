@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Data\RecurringShippingTypeEnum;
 use App\Enums\DeliveryCategoryEnum;
 use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
@@ -103,6 +104,7 @@ class Order extends Model implements HasMedia
         'goods_number',
         'goods_weight',
         'goods_type',
+        'bulk',
         'message',
         'address_from',
         'address_to',
@@ -110,7 +112,11 @@ class Order extends Model implements HasMedia
         'delivery_at',
         'pickup_location_type',
         'delivery_location_type',
+        'recurring_shipping',
+        'recurring_shipping_type',
+        'recurring_shipping_custom',
         'details',
+
         'user_id',
         'vendor_id',
         'read_at',
@@ -122,8 +128,9 @@ class Order extends Model implements HasMedia
         'goods_type' => VariousGoodsTypeEnum::class,
         'pickup_location_type' => DeliveryLocationTypeEnum::class,
         'delivery_location_type' => DeliveryLocationTypeEnum::class,
-        'pickup_at' => 'date',
-        'delivery_at' => 'date',
+        'recurring_shipping_type' => RecurringShippingTypeEnum::class,
+        'pickup_at' => 'datetime',
+        'delivery_at' => 'datetime',
         'read_at' => 'datetime',
         'details' => 'array',
     ];

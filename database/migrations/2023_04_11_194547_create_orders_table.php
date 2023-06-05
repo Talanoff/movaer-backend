@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -24,15 +23,19 @@ return new class extends Migration
             $table->unsignedSmallInteger('goods_number')->nullable();
             $table->unsignedInteger('goods_weight')->nullable();
             $table->unsignedTinyInteger('goods_type')->nullable();
+            $table->text('bulk')->nullable();
             $table->text('message')->nullable();
             $table->foreignIdFor(Country::class, 'country_from_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->foreignIdFor(Country::class, 'country_to_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->text('address_from');
             $table->text('address_to');
-            $table->date('pickup_at');
-            $table->date('delivery_at');
+            $table->timestamp('pickup_at');
+            $table->timestamp('delivery_at');
             $table->unsignedTinyInteger('pickup_location_type');
             $table->unsignedTinyInteger('delivery_location_type');
+            $table->boolean('recurring_shipping')->default(0);
+            $table->unsignedTinyInteger('recurring_shipping_type')->nullable();
+            $table->text('recurring_shipping_custom')->nullable();
             $table->json('details');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();

@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Data\RecurringShippingTypeEnum;
+use App\Enums\VariousGoodsTypeEnum;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Wish;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Resources\Form;
@@ -73,11 +76,39 @@ class OrderResource extends Resource
                             ->label(trans('forms.fields.quantity'))
                             ->required(),
                         Forms\Components\TextInput::make('goods_weight')
-                            ->label(trans('forms.fields.weight').' (kg)')
+                            ->label(trans('forms.fields.weight') . ' (kg)')
                             ->required(),
-                        Forms\Components\Select::make('goods_type')
-                            ->label(trans('forms.fields.goods_type'))
-                            ->options(trans('forms.various_goods')),
+                        Forms\Components\Fieldset::make(trans('forms.fields.goods'))
+                            ->schema([
+                                Forms\Components\Select::make('goods_type')
+                                    ->label(trans('forms.fields.goods_type'))
+                                    ->options(trans('forms.various_goods'))
+                                    ->reactive(),
+                                Forms\Components\Textarea::make('bulk')
+                                    ->hidden(function (Closure $get) {
+                                        return $get('goods_type') != VariousGoodsTypeEnum::Bulk->value;
+                                    }),
+                            ]),
+                        Forms\Components\Fieldset::make(trans('forms.fields.recurring_shipping'))
+                            ->columns(1)
+                            ->schema([
+                                Forms\Components\Checkbox::make('recurring_shipping')
+                                    ->reactive(),
+                                Forms\Components\Select::make('recurring_shipping_type')
+                                    ->required()
+                                    ->disablePlaceholderSelection()
+                                    ->options(trans('forms.recurring_shipping'))
+                                    ->hidden(fn(Closure $get) => $get('recurring_shipping') === false)
+                                    ->reactive()
+                                    ->rules(['required_if:recurring_shipping']),
+                                Forms\Components\Textarea::make('recurring_shipping_custom')
+                                    ->required()
+                                    ->hidden(function (Closure $get) {
+                                        return $get('recurring_shipping_type') != RecurringShippingTypeEnum::CustomRange->value
+                                            || $get('recurring_shipping') === false;
+                                    })
+                                    ->rules(['required_if:recurring_shipping_type,' . RecurringShippingTypeEnum::CustomRange->value])
+                            ]),
                         Forms\Components\Textarea::make('message')
                             ->rows(3)
                             ->columnSpan(2),
@@ -151,11 +182,11 @@ class OrderResource extends Resource
                     ->alignCenter()
                     ->boolean()
                     ->options([
-                        'heroicon-o-check-circle' => fn ($state): bool => $state !== null,
+                        'heroicon-o-check-circle' => fn($state): bool => $state !== null,
                     ]),
                 Tables\Columns\TextColumn::make('id')
                     ->label(trans('forms.fields.order_no'))
-                    ->formatStateUsing(fn (int $state) => "#$state"),
+                    ->formatStateUsing(fn(int $state) => "#$state"),
                 Tables\Columns\SelectColumn::make('vendor_id')
                     ->label(trans('forms.fields.vendor'))
                     ->options(Vendor::pluck('name', 'id')),
@@ -170,20 +201,20 @@ class OrderResource extends Resource
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_weight')
                     ->label(trans('forms.fields.weight'))
-                    ->formatStateUsing(fn ($state): string => "$state kg")
+                    ->formatStateUsing(fn($state): string => "$state kg")
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_type')
                     ->label(trans('forms.fields.goods_type'))
                     ->enum(trans('forms.various_goods')),
                 Tables\Columns\TextColumn::make('address_from')
                     ->label(trans('forms.fields.pickup_details'))
-                    ->description(fn (Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
-                    ->description(fn (Order $record) => $record->pickup_location_type->getName())
+                    ->description(fn(Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
+                    ->description(fn(Order $record) => $record->pickup_location_type->getName())
                     ->wrap(),
                 Tables\Columns\TextColumn::make('address_to')
                     ->label(trans('forms.fields.delivery_details'))
-                    ->description(fn (Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
-                    ->description(fn (Order $record) => $record->delivery_location_type->getName())
+                    ->description(fn(Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
+                    ->description(fn(Order $record) => $record->delivery_location_type->getName())
                     ->wrap(),
                 Tables\Columns\IconColumn::make('user_id')
                     ->label(trans('forms.fields.registered'))

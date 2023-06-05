@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Questionnaire;
 
+use App\Data\RecurringShippingTypeEnum;
 use App\Enums\UserRoleEnum;
 use App\Enums\VariousGoodsTypeEnum;
 use Auth;
@@ -31,6 +32,11 @@ class CustomerBookingRequest extends FormRequest
             'selectLocationTo' => ['required', 'int'],
             'message' => ['nullable', 'string'],
             'goods' => ['nullable', 'int', new Enum(VariousGoodsTypeEnum::class)],
+            'bulk' => ['nullable', 'string'],
+
+            'recurringShipping' => ['boolean'],
+            'recurringShippingType' => ['nullable', 'int', new Enum(RecurringShippingTypeEnum::class)],
+            'recurringShippingCustom' => ['nullable', 'string'],
 
             'wishes' => ['nullable', 'array'],
             'additionalWishes' => ['nullable', 'array'],
@@ -42,7 +48,7 @@ class CustomerBookingRequest extends FormRequest
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
         ];
 
-        if (! Auth::guard('sanctum')->check()) {
+        if (!Auth::guard('sanctum')->check()) {
             $rules = array_merge($rules, [
                 'name' => ['required', 'string', 'max:191'],
                 'email' => ['required', 'email', 'max:191'],

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Data\RecurringShippingTypeEnum;
 use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\VariousGoodsTypeEnum;
 use App\Mappers\KeyValue;
@@ -24,7 +25,7 @@ class ConfigRepository
     public function vehicles(array $services): array
     {
         return Vehicle::with('service:id,name')
-            ->when(count($services), fn (Builder $query) => $query->whereIn('service_id', $services))
+            ->when(count($services), fn(Builder $query) => $query->whereIn('service_id', $services))
             ->get(['name', 'service_id', 'id'])
             ->groupBy('service.id')
             ->map->mapInto(KeyValue::class)
@@ -42,7 +43,7 @@ class ConfigRepository
     public function wishes(): array
     {
         return Wish::get(['id', 'name', 'category'])
-            ->groupBy(fn ($category) => $category->category->value)
+            ->groupBy(fn($category) => $category->category->value)
             ->map->mapInto(KeyValue::class)
             ->toArray();
     }
@@ -55,5 +56,10 @@ class ConfigRepository
     public function variousGoods(): array
     {
         return VariousGoodsTypeEnum::toResource();
+    }
+
+    public function recurringShipping(): array
+    {
+        return RecurringShippingTypeEnum::toResource();
     }
 }

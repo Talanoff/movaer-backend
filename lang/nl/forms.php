@@ -82,6 +82,7 @@ return [
         VariousGoodsTypeEnum::ConstructionMaterials->value => 'Bouwmaterialen',
         VariousGoodsTypeEnum::Cattle->value => 'Vee',
         VariousGoodsTypeEnum::HangingMeat->value => 'Hangend Vlees',
+        VariousGoodsTypeEnum::Bulk->value => 'Bulk',
         VariousGoodsTypeEnum::SomethingDifferent->value => 'Anders',
     ],
 

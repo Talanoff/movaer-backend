@@ -1,5 +1,6 @@
 <?php
 
+use App\Data\RecurringShippingTypeEnum;
 use App\Enums\DeliveryCategoryEnum;
 use App\Enums\DeliveryLocationTypeEnum;
 use App\Enums\OrderStatusEnum;
@@ -21,6 +22,8 @@ return [
         'is_default' => 'Use as default',
         'role' => 'Role',
         'weight' => 'Weight',
+        'goods' => 'Goods',
+        'recurring_shipping' => 'Recurring shipping',
         'goods_type' => 'Goods type',
         'pickup_details' => 'Pickup details',
         'delivery_details' => 'Delivery details',
@@ -82,7 +85,18 @@ return [
         VariousGoodsTypeEnum::ConstructionMaterials->value => 'Construction Materials',
         VariousGoodsTypeEnum::Cattle->value => 'Cattle',
         VariousGoodsTypeEnum::HangingMeat->value => 'Hanging Meat',
+        VariousGoodsTypeEnum::Bulk->value => 'Bulk',
         VariousGoodsTypeEnum::SomethingDifferent->value => 'Something different',
+    ],
+
+    'recurring_shipping' => [
+        RecurringShippingTypeEnum::EveryDay->value => 'Every day',
+        RecurringShippingTypeEnum::EveryWorkingDay->value => 'Every working day',
+        RecurringShippingTypeEnum::EveryHoliday->value => 'Every holiday',
+        RecurringShippingTypeEnum::EveryWeek->value => 'Every week',
+        RecurringShippingTypeEnum::EveryTwoWeeks->value => 'Every two weeks',
+        RecurringShippingTypeEnum::EveryMonth->value => 'Every month',
+        RecurringShippingTypeEnum::CustomRange->value => 'Custom range',
     ],
 
     'users' => [
