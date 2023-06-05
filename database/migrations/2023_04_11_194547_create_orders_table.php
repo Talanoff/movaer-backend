@@ -29,8 +29,8 @@ return new class extends Migration {
             $table->foreignIdFor(Country::class, 'country_to_id')->nullable()->constrained('countries')->nullOnDelete();
             $table->text('address_from');
             $table->text('address_to');
-            $table->timestamp('pickup_at');
-            $table->timestamp('delivery_at');
+            $table->timestamp('pickup_at')->nullable();
+            $table->timestamp('delivery_at')->nullable();
             $table->unsignedTinyInteger('pickup_location_type');
             $table->unsignedTinyInteger('delivery_location_type');
             $table->boolean('recurring_shipping')->default(0);
