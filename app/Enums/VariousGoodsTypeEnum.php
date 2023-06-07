@@ -20,9 +20,9 @@ enum VariousGoodsTypeEnum: int
 
     public static function toResource(): array
     {
-        return array_map(static fn($it) => [
+        return array_map(static fn ($it) => [
             'key' => $it->value,
-            'value' => trans('forms.various_goods.' . $it->value),
+            'value' => trans('forms.various_goods.'.$it->value),
         ], self::cases());
     }
 }

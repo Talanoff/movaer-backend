@@ -4,7 +4,6 @@ namespace App\Data;
 
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Data;
-use Spatie\LaravelData\Optional;
 
 class OrderDetailsData extends Data
 {

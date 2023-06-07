@@ -12,8 +12,7 @@ class ConfigController extends Controller
 {
     public function __construct(
         protected readonly ConfigRepository $configRepository
-    )
-    {
+    ) {
         //
     }
 
@@ -46,7 +45,7 @@ class ConfigController extends Controller
             'wishes' => $this->configRepository->wishes(),
             'locationTypes' => $this->configRepository->locationTypes(),
             'goodsTypes' => $this->configRepository->variousGoods(),
-            'recurringShipping' => $this->configRepository->recurringShipping()
+            'recurringShipping' => $this->configRepository->recurringShipping(),
         ]);
     }
 }

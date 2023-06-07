@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Data\RecurringShippingTypeEnum;
+use App\Enums\DeliveryCategoryEnum;
 use App\Enums\VariousGoodsTypeEnum;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Country;
@@ -70,23 +71,39 @@ class OrderResource extends Resource
                             ->options(trans('forms.orders.statuses'))
                             ->required(),
                         Forms\Components\Select::make('category')
+                            ->reactive()
                             ->options(trans('forms.orders.categories'))
+                            ->afterStateUpdated(function (int $state, callable $set) {
+                                if ($state === DeliveryCategoryEnum::OnePackage->value) {
+                                    $set('goods_number', 1);
+                                }
+                            })
                             ->required(),
                         Forms\Components\TextInput::make('goods_number')
+                            ->numeric()
+                            ->default(1)
                             ->label(trans('forms.fields.quantity'))
+                            ->disabled(function (callable $get) {
+                                return ! $get('category')
+                                    || (int) $get('category') === DeliveryCategoryEnum::OnePackage->value;
+                            })
                             ->required(),
                         Forms\Components\TextInput::make('goods_weight')
-                            ->label(trans('forms.fields.weight') . ' (kg)')
+                            ->label(trans('forms.fields.weight').' (kg)')
                             ->required(),
                         Forms\Components\Fieldset::make(trans('forms.fields.goods'))
+                            ->hidden(function (callable $get) {
+                                return (int) $get('category') !== DeliveryCategoryEnum::Various->value;
+                            })
                             ->schema([
                                 Forms\Components\Select::make('goods_type')
                                     ->label(trans('forms.fields.goods_type'))
                                     ->options(trans('forms.various_goods'))
                                     ->reactive(),
                                 Forms\Components\Textarea::make('bulk')
+                                    ->columnSpanFull()
                                     ->hidden(function (Closure $get) {
-                                        return $get('goods_type') != VariousGoodsTypeEnum::Bulk->value;
+                                        return (int) $get('goods_type') !== VariousGoodsTypeEnum::Bulk->value;
                                     }),
                             ]),
                         Forms\Components\Fieldset::make(trans('forms.fields.recurring_shipping'))
@@ -98,16 +115,16 @@ class OrderResource extends Resource
                                     ->required()
                                     ->disablePlaceholderSelection()
                                     ->options(trans('forms.recurring_shipping'))
-                                    ->hidden(fn(Closure $get) => $get('recurring_shipping') === false)
+                                    ->hidden(fn (Closure $get) => $get('recurring_shipping') === false)
                                     ->reactive()
-                                    ->rules(['required_if:recurring_shipping']),
+                                    ->rules(['required_if:recurring_shipping,true']),
                                 Forms\Components\Textarea::make('recurring_shipping_custom')
                                     ->required()
                                     ->hidden(function (Closure $get) {
-                                        return $get('recurring_shipping_type') != RecurringShippingTypeEnum::CustomRange->value
+                                        return (int) $get('recurring_shipping_type') !== RecurringShippingTypeEnum::CustomRange->value
                                             || $get('recurring_shipping') === false;
                                     })
-                                    ->rules(['required_if:recurring_shipping_type,' . RecurringShippingTypeEnum::CustomRange->value])
+                                    ->rules(['required_if:recurring_shipping_type,'.RecurringShippingTypeEnum::CustomRange->value]),
                             ]),
                         Forms\Components\Textarea::make('message')
                             ->rows(3)
@@ -132,10 +149,10 @@ class OrderResource extends Resource
                             ->label(trans('forms.fields.delivery_address'))
                             ->rows(4)
                             ->required(),
-                        Forms\Components\DatePicker::make('pickup_at')
+                        Forms\Components\DateTimePicker::make('pickup_at')
                             ->label(trans('forms.fields.pickup_date'))
                             ->required(),
-                        Forms\Components\DatePicker::make('delivery_at')
+                        Forms\Components\DateTimePicker::make('delivery_at')
                             ->label(trans('forms.fields.delivery_date'))
                             ->required(),
                         Forms\Components\Select::make('pickup_location_type')
@@ -182,11 +199,11 @@ class OrderResource extends Resource
                     ->alignCenter()
                     ->boolean()
                     ->options([
-                        'heroicon-o-check-circle' => fn($state): bool => $state !== null,
+                        'heroicon-o-check-circle' => fn ($state): bool => $state !== null,
                     ]),
                 Tables\Columns\TextColumn::make('id')
                     ->label(trans('forms.fields.order_no'))
-                    ->formatStateUsing(fn(int $state) => "#$state"),
+                    ->formatStateUsing(fn (int $state) => "#$state"),
                 Tables\Columns\SelectColumn::make('vendor_id')
                     ->label(trans('forms.fields.vendor'))
                     ->options(Vendor::pluck('name', 'id')),
@@ -201,20 +218,20 @@ class OrderResource extends Resource
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_weight')
                     ->label(trans('forms.fields.weight'))
-                    ->formatStateUsing(fn($state): string => "$state kg")
+                    ->formatStateUsing(fn ($state): string => "$state kg")
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('goods_type')
                     ->label(trans('forms.fields.goods_type'))
                     ->enum(trans('forms.various_goods')),
                 Tables\Columns\TextColumn::make('address_from')
                     ->label(trans('forms.fields.pickup_details'))
-                    ->description(fn(Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
-                    ->description(fn(Order $record) => $record->pickup_location_type->getName())
+                    ->description(fn (Order $record) => $record->pickup_at?->format('M d, Y'), position: 'above')
+                    ->description(fn (Order $record) => $record->pickup_location_type->getName())
                     ->wrap(),
                 Tables\Columns\TextColumn::make('address_to')
                     ->label(trans('forms.fields.delivery_details'))
-                    ->description(fn(Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
-                    ->description(fn(Order $record) => $record->delivery_location_type->getName())
+                    ->description(fn (Order $record) => $record->delivery_at?->format('M d, Y'), position: 'above')
+                    ->description(fn (Order $record) => $record->delivery_location_type->getName())
                     ->wrap(),
                 Tables\Columns\IconColumn::make('user_id')
                     ->label(trans('forms.fields.registered'))

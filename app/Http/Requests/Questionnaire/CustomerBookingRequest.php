@@ -48,7 +48,7 @@ class CustomerBookingRequest extends FormRequest
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
         ];
 
-        if (!Auth::guard('sanctum')->check()) {
+        if (! Auth::guard('sanctum')->check()) {
             $rules = array_merge($rules, [
                 'name' => ['required', 'string', 'max:191'],
                 'email' => ['required', 'email', 'max:191'],

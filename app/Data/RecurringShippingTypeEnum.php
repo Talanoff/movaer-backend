@@ -14,9 +14,9 @@ enum RecurringShippingTypeEnum: int
 
     public static function toResource(): array
     {
-        return array_map(static fn($it) => [
+        return array_map(static fn ($it) => [
             'key' => $it->value,
-            'value' => trans('forms.recurring_shipping.' . $it->value),
+            'value' => trans('forms.recurring_shipping.'.$it->value),
         ], self::cases());
     }
 }
