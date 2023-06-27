@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Filament\Facades\Filament;
-use Filament\Navigation\NavigationGroup;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Vite;
@@ -37,16 +36,6 @@ class AppServiceProvider extends ServiceProvider
 
         Filament::serving(static function () {
             Filament::registerViteTheme('resources/css/filament.css');
-
-            //            Filament::registerNavigationGroups([
-            //                NavigationGroup::make()
-            //                    ->label('Settings')
-            //                    ->collapsed(),
-            //
-            //                NavigationGroup::make()
-            //                    ->label('Management')
-            //                    ->collapsed(),
-            //            ]);
         });
     }
 }
