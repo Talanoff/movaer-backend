@@ -22,7 +22,7 @@ class VendorJoinRequest extends FormRequest
             'companyName' => ['required', 'string', 'max:191'],
             'commerceNumber' => ['required', 'string', 'max:191'],
             'iban' => ['required', 'string', 'max:33'],
-            'vat' => ['required', 'numeric'],
+            'vat' => ['required', 'string'],
             'country' => ['required', 'numeric', 'exists:countries,id'],
             'address' => ['required', 'string'],
             'location' => ['required', 'string'],
@@ -35,7 +35,7 @@ class VendorJoinRequest extends FormRequest
             'locale' => ['required', 'string', Rule::in(config('app.locales'))],
         ];
 
-        if (! Auth::guard('sanctum')->check()) {
+        if (!Auth::guard('sanctum')->check()) {
             $rules = array_merge($rules, [
                 'name' => ['required', 'string'],
                 'personalPhone' => ['required', 'string'],
